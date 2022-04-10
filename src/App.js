@@ -28,7 +28,8 @@ function App() {
 
       <main>
         <div className="container">
-          <div className="tests__list">
+          {/* ListItem */}
+          {/* <div className="tests__list">
             <div className="test__item">
               <div className="item__inner">
                 <img
@@ -71,7 +72,87 @@ function App() {
                 </div>
               </div>
             </div>
+          </div> */}
+
+          {/* createTest */}
+          <div className="constructor">
+            <div className="constructor__inner">
+              <h1>Конструктор теста</h1>
+              <form className="constructor__form">
+                <div className="constructor__input">
+                  <label>введите вопрос</label>
+                  <input className="control__input" type="text" />
+                </div>
+                <div className="constructor__input">
+                  <label>введите первый вариант</label>
+                  <input className="control__input" type="text" />
+                </div>
+                <div className="constructor__input">
+                  <label>введите второй вариант</label>
+                  <input className="control__input" type="text" />
+                </div>
+                <div className="constructor__input">
+                  <label>введите третий вариант</label>
+                  <input className="control__input" type="text" />
+                </div>
+                <div className="constructor__input">
+                  <label>введите четвертый вариант</label>
+                  <input className="control__input" type="text" />
+                </div>
+                <div className="constructor__select">
+                  <label>Выберите правильный ответ</label>
+                  <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
+                </div>
+
+                <div className="constructor__image">
+                  <label>загрузить изображение</label>
+                  <input className="input__file" type="file" />
+                </div>
+
+                <button className="constructor__btn-add btn">
+                  Добавить вопрос
+                </button>
+                <button className="constructor__btn-creat btn">
+                  Создать тест
+                </button>
+              </form>
+            </div>
           </div>
+
+          {/* authorization */}
+          {/* 
+          <div className="authorization">
+            <div className="authorization__inner">
+              <h1>Авторизация</h1>
+              <div className="authorization__login">
+                <label>Логин</label>
+                <input
+                  className="control__input"
+                  type="text"
+                  name="login"
+                  placeholder="Введите логин"
+                />
+              </div>
+              <div className="authorization__passwd">
+                <label>Пароль</label>
+                <input
+                  className="control__input"
+                  type="password"
+                  name="password"
+                  placeholder="Введите пароль"
+                />
+              </div>
+              <div className="authorization__buttons">
+                <button className="btn">Войти</button>
+                <button className="btn">Зарегистрироваться</button>
+              </div>
+            </div>
+          </div> */}
         </div>
       </main>
     </>
