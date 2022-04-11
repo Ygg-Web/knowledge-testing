@@ -33,8 +33,8 @@ function App() {
             <div className="test__item">
               <div className="item__inner">
                 <img
-                  src="https://images6.alphacoders.com/488/thumb-1920-488158.jpg"
                   className="item__image"
+                  src="https://images6.alphacoders.com/488/thumb-1920-488158.jpg"
                 />
                 <div className="item__body">
                   <h2 className="item__title">
@@ -110,8 +110,8 @@ function App() {
                 </div>
 
                 <div className="constructor__image">
-                  <label>загрузить изображение</label>
-                  <input className="input__file" type="file" />
+                  <label for="file">Загрузить изображение</label>
+                  <input className="input__file" type="file" id="file" />
                 </div>
 
                 <button className="constructor__btn-add btn">
@@ -150,6 +150,81 @@ function App() {
               <div className="authorization__buttons">
                 <button className="btn">Войти</button>
                 <button className="btn">Зарегистрироваться</button>
+              </div>
+            </div>
+          </div> */}
+
+          {/* startTest */}
+
+          {/* <div className="testdone">
+            <div className="testdone__inner">
+              <img
+                className="item__image"
+                src="https://images6.alphacoders.com/488/thumb-1920-488158.jpg"
+              />
+              <div className="testdone__body">
+                <div className="testdone__info">
+                  <a className="info__user" href="/">
+                    <img
+                      src="https://yt3.ggpht.com/a/AATXAJz_1rU2Tf3KCJoPZfd7ibjAeyqR9UIHEWB8cQ=s900-c-k-c0xffffffff-no-rj-mo"
+                      alt="avatar"
+                    />
+                    <span>username</span>
+                  </a>
+                  <a className="info__rating" href="/">
+                    <span>123</span>
+                  </a>
+                  <a className="info__done" href="/">
+                    <span>500</span>
+                  </a>
+                </div>
+                <h2 className="testdone__title">
+                  <a href="/">
+                    Лучший босс игры Лучший босс игры Лучший босс игры
+                  </a>
+                </h2>
+                <div className="testdone__text">
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                  </p>
+                </div>
+                <div className="testdone__bottom">
+                  <div className="testdone__number">
+                    <p>10 вопросов</p>
+                  </div>
+                  <div className="testdone__button">
+                    <button className="btn">Поехали!</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+          {/* viewtest */}
+          {/* <div className="question">
+            <div className="question__inner">
+              <div className="question__title">
+                <h3>Название вопроса?</h3>
+              </div>
+              <div className="answer__body">
+                <h4>Выберите правильный вариант:</h4>
+                <div className="answer__item">
+                  <label for="answer0">вариант 1</label>
+                  <input type="radio" name="answer" id="answer0" value="0" />
+                </div>
+                <div className="answer__item">
+                  <label for="answer1">вариант 1</label>
+                  <input type="radio" name="answer" id="answer1" value="1" />
+                </div>
+                <div className="answer__item">
+                  <label for="answer2">вариант 1</label>
+                  <input type="radio" name="answer" id="answer2" value="2" />
+                </div>
+                <div className="answer__item">
+                  <label for="answer3">вариант 1</label>
+                  <input type="radio" name="answer" id="answer3" value="3" />
+                </div>
               </div>
             </div>
           </div> */}
