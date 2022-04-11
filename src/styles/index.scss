@@ -67,11 +67,9 @@ header{
     padding: 9px 20px;
     background: #662DFC;
     border-radius: 22.5px;
-      .login{
-      display: flex;
-      justify-content: center;
-      align-items:center;
-      }
+    display: flex;
+    justify-content: center;
+    align-items:center;
       img{
         width: 23px;
         height: 23px;
@@ -479,5 +477,35 @@ header{
     input{
       display: none;
     }
+  }
+}
+
+
+//header for question
+
+.question__header{
+  background:#221A37;
+}
+
+.wrapper{
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  color: #662DFC;
+  .question__name{
+    display: flex;
+    justify-content: space-between;
+    .question__count{
+      margin: 0 25px ;
+    }
+  }
+  .question__exit{
+    span{
+      margin: 0 15px;
+      &:last-child{
+        margin-right:0 ;
+      }
+    }
+  
   }
 }
