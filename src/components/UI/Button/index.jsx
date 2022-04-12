@@ -1,7 +1,9 @@
+import classes from "./Button.module.scss";
+
 export const Button = (props) => {
   return (
     <button
-      className={("constructor__btn-add btn", props.styles)}
+      className={classes.btn}
       onClick={props.onClick}
       disabled={props.disabled}
     >

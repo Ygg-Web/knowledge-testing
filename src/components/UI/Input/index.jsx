@@ -1,23 +1,27 @@
-export const Input = (props) => {
-  const nameFor = `${props.type} + ${Math.random()}`;
+import classes from "./input.module.scss";
+
+export const Input = ({ control, onChange }) => {
+  const nameFor = `${control.type} + ${Math.random()}`;
+  const cls = [classes.input];
+
+  isInvalid(control) && cls.push(classes.invalid);
 
   return (
-    <div className={("constructor__input", isInvalid(props) && "invalid")}>
-      <label for={nameFor}>{props.label}</label>
+    <div className={cls.join(" ")}>
+      <label htmlFor={nameFor}>{control.label}</label>
       <input
-        type={props.type || "text"}
+        type={control.type || "text"}
         id={nameFor}
-        value={props.value}
-        onChange={props.onChange}
-        className="control__input"
+        value={control.value}
+        onChange={onChange}
       />
-      {isInvalid(props) && (
-        <span>{props.errorMessage || "Введите верное значение"}</span>
-      )}
+      {isInvalid(control) ? (
+        <span>{control.errorMessage || "Введите верное значение"}</span>
+      ) : null}
     </div>
   );
 };
 
-function isInvalid({ valid, toushed, shouldValidate }) {
-  return !valid && shouldValidate && toushed;
+function isInvalid({ valid, touched, validation }) {
+  return !valid && !!validation && touched;
 }

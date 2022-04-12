@@ -1,32 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "../../components/UI/Button";
+import { Input } from "../../components/UI/Input";
+import { createControl, validate } from "../../formHelpers";
+
+const initialState = {
+  formControls: {
+    email: createControl(
+      {
+        label: "Введите ваш ID",
+        type: "email",
+        errorMessage: "Введите корректные даннные",
+      },
+      { required: true, email: true }
+    ),
+    password: createControl(
+      {
+        label: "Введите пароль",
+        type: "password",
+        errorMessage: "Введите корректный пароль",
+      },
+      { required: true, minLength: 6 }
+    ),
+  },
+  isFormReady: false,
+};
 
 export const Auth = () => {
+  const [localState, setLocalState] = useState(initialState);
+
+  const onSumbmitHandler = (e) => {
+    e.preventDefault();
+  };
+
+  const onChanheHandler = (e, conrolField) => {
+    const formControls = { ...localState.formControls };
+    const control = { ...formControls[conrolField] };
+
+    control.value = e.target.value;
+    control.touched = true;
+    control.valid = validate(control.value, control.validation);
+
+    formControls[conrolField] = control;
+
+    let isFormReady = true;
+
+    Object.keys(formControls).forEach((control) => {
+      isFormReady = formControls[control].valid && isFormReady;
+    });
+
+    setLocalState({ formControls, isFormReady });
+  };
+
+  const loginHandler = () => {};
+  const registerHandler = () => {};
+
+  const renderFormControls = () => {
+    return Object.keys(localState.formControls).map((controlField, index) => {
+      const control = localState.formControls[controlField];
+      return (
+        <Input
+          key={controlField + index}
+          control={control}
+          onChange={(e) => onChanheHandler(e, controlField)}
+        />
+      );
+    });
+  };
+
   return (
     <div className="authorization">
       <div className="authorization__inner">
         <h1>Авторизация</h1>
-        <div className="authorization__login">
-          <label>Логин</label>
-          <input
-            className="control__input"
-            type="text"
-            name="login"
-            placeholder="Введите логин"
-          />
-        </div>
-        <div className="authorization__passwd">
-          <label>Пароль</label>
-          <input
-            className="control__input"
-            type="password"
-            name="password"
-            placeholder="Введите пароль"
-          />
-        </div>
-        <div className="authorization__buttons">
-          <button className="btn">Войти</button>
-          <button className="btn">Зарегистрироваться</button>
-        </div>
+        <form onSubmit={onSumbmitHandler}>
+          {renderFormControls()}
+          <div className="authorization__buttons">
+            <Button onClick={loginHandler} disabled={!localState.isFormReady}>
+              Войти
+            </Button>
+            <Button
+              onClick={registerHandler}
+              disabled={!localState.isFormReady}
+            >
+              Зарегистрироваться
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );

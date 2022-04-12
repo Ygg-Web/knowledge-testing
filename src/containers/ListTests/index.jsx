@@ -1,54 +1,93 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { CartTest } from "../../components/TestItem/CartTest";
+import { Loader } from "../../components/UI/Loader";
+
+const initialState = {
+  tests: [
+    {
+      id: 1,
+      nameTest: "История",
+      question: "В каком году родился Вася?",
+      answers: {
+        0: { id: 1, text: "1992" },
+        1: { id: 1, text: "1982" },
+        2: { id: 1, text: "1892" },
+        3: { id: 1, text: "1899" },
+      },
+      image: "https://images6.alphacoders.com/488/thumb-1920-488158.jpg",
+      discription: "Этот тест для очень заботливых .....",
+      rating: 123,
+      viewed: 12,
+      author: {
+        username: "pop",
+        avatar:
+          "https://yt3.ggpht.com/a/AATXAJz_1rU2Tf3KCJoPZfd7ibjAeyqR9UIHEWB8cQ=s900-c-k-c0xffffffff-no-rj-mo",
+      },
+      rightAnswerId: 1,
+    },
+
+    {
+      id: 2,
+      nameTest: "Война",
+      question: "В каком году была ВОВ?",
+      answers: {
+        0: { id: 1, text: "1939" },
+        1: { id: 1, text: "1940" },
+        2: { id: 1, text: "1941" },
+        3: { id: 1, text: "1942" },
+      },
+      image: "https://images6.alphacoders.com/488/thumb-1920-488158.jpg",
+      discription: "Этот тест для очень заботливых .....",
+      rating: 123,
+      viewed: 12,
+      author: {
+        username: "jone",
+        avatar:
+          "https://yt3.ggpht.com/a/AATXAJz_1rU2Tf3KCJoPZfd7ibjAeyqR9UIHEWB8cQ=s900-c-k-c0xffffffff-no-rj-mo",
+      },
+      rightAnswerId: 2,
+    },
+
+    {
+      id: 3,
+      nameTest: "Времена года",
+      question: "Когда идет снег?",
+      answers: {
+        0: { id: 1, text: "Зимой" },
+        1: { id: 1, text: "Весной" },
+        2: { id: 1, text: "Осенью" },
+        3: { id: 1, text: "Летом" },
+      },
+      image: "https://images6.alphacoders.com/488/thumb-1920-488158.jpg",
+      discription: "Этот тест для очень заботливых .....",
+      rating: 123,
+      viewed: 12,
+      author: {
+        username: "dodo",
+        avatar:
+          "https://yt3.ggpht.com/a/AATXAJz_1rU2Tf3KCJoPZfd7ibjAeyqR9UIHEWB8cQ=s900-c-k-c0xffffffff-no-rj-mo",
+      },
+      rightAnswerId: 3,
+    },
+  ],
+  loading: false,
+};
 
 export const ListTests = () => {
+  const [state, setState] = useState(initialState);
+  const { tests } = state;
+  console.log(tests);
   return (
-    <div className="tests__list">
-      <div className="test__item">
-        <div className="item__inner">
-          <Link to="/test/:id">
-            <img
-              className="item__image"
-              src="https://images6.alphacoders.com/488/thumb-1920-488158.jpg"
-            />
-          </Link>
-          <div className="item__body">
-            <Link to="/test/:id">
-              <h2 className="item__title">
-                Лучший босс игры Лучший босс игры Лучший босс игры
-              </h2>
-            </Link>
-            <div className="item__text">
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s
-              </p>
-            </div>
-          </div>
-          <div className="item__bottom">
-            <div className="item__rating">
-              <i>9</i>
-            </div>
-            <div className="item__limit">
-              <i>10</i>
-            </div>
-            <Link to="/">
-              <div className="item__profile">
-                <i>username</i>
-                <img
-                  src="https://yt3.ggpht.com/a/AATXAJz_1rU2Tf3KCJoPZfd7ibjAeyqR9UIHEWB8cQ=s900-c-k-c0xffffffff-no-rj-mo"
-                  alt="avatar"
-                />
-              </div>
-            </Link>
-          </div>
+    <>
+      {state.loading ? (
+        <Loader />
+      ) : (
+        <div className="tests__list">
+          {tests.map((test, index) => (
+            <CartTest key={test.id + index} test={test} />
+          ))}
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };

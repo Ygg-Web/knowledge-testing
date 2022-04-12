@@ -1,0 +1,23 @@
+.btn{
+  padding: 10px 20px;
+  margin: 20px 0;
+  width: 100%;
+  display: block;
+  font-size: 20px;
+  font-family: inherit;
+  border: 0;
+  border-radius:15.5px;
+  box-shadow: 0px 8px 25px rgba(102, 45, 252, 0.26);
+  background: #662DFC;
+  cursor: pointer;
+
+  &:hover{
+    background: #B396FD;
+    box-shadow: 0px 8px 25px rgba(102, 45, 252, 0.26);
+  }
+
+  &:disabled{
+    cursor: not-allowed;
+  }
+}
+

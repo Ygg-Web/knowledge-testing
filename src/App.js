@@ -7,7 +7,7 @@ import { ListTests } from "./containers/ListTests/";
 import { Constructor } from "./containers/Constructor";
 import { PreviewTest } from "./containers/PreviewTest";
 import { Auth } from "./containers/Auth";
-import { TestItem } from "./containers/TestItem";
+import { Testing } from "./containers/Testing";
 
 // const initialState = {
 //   id: 1,
@@ -28,7 +28,7 @@ function App() {
             <Route path="/constructor" element={<Constructor />} />
             <Route path="/auth" element={<Auth />} />
             {/* <Redirect to="/" /> */}
-            <Route path="/test/:id/" element={<TestItem />} />
+            <Route path="/test/:id/" element={<Testing />} />
           </Routes>
         </Container>
       </Router>

@@ -1,0 +1,25 @@
+.input{
+  font-family: 'Monserrate';
+  margin: 30px 0;
+  font-size: 21px;
+    input{ 
+    width: 100%;
+    padding: 10px;
+    border:0;
+    outline: none;
+    font-size: 21px;
+    box-shadow:0 2px  10px 4px rgba(0,245,0,0.1);
+    border-radius: 5px;
+    color:#000;
+    font-family: inherit;
+  }
+
+  span{
+    color: #c40919;
+    font-size: 18px;
+  }
+  &.invalid label{
+    color: #c40919;
+  }
+}
+
