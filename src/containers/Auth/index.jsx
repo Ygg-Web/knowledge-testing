@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../../components/UI/Button";
 import { Input } from "../../components/UI/Input";
-import { createControl, validate } from "../../formHelpers";
+import { createControl, validate, validateForm } from "../../formHelpers";
 
 const initialState = {
   formControls: {
@@ -42,13 +42,11 @@ export const Auth = () => {
 
     formControls[conrolField] = control;
 
-    let isFormReady = true;
-
-    Object.keys(formControls).forEach((control) => {
-      isFormReady = formControls[control].valid && isFormReady;
-    });
-
-    setLocalState({ formControls, isFormReady });
+    setLocalState((prev) => ({
+      ...prev,
+      formControls,
+      isFormReady: validateForm(formControls),
+    }));
   };
 
   const loginHandler = () => {};

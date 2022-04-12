@@ -1,15 +1,5 @@
 import React from "react";
-import { AnswerItem } from "../../components/TestItem/AnswerItem";
-
-const initialState = {
-  answers: [
-    { text: "вариант ответа 1", id: 1 },
-    { text: "вариант ответа 2", id: 2 },
-    { text: "вариант ответа 3", id: 3 },
-    { text: "вариант ответа 4", id: 4 },
-  ],
-  question: "название вопроса?",
-};
+import { AnswerItem } from "../AnswerItem";
 
 export const ActiveTestItem = (props) => {
   return (
@@ -29,6 +19,7 @@ export const ActiveTestItem = (props) => {
             key={answer.id + index}
             answer={answer}
             onClick={props.onClick}
+            answerMark={props.answerMark ? props.answerMark[answer.id] : null}
           />
         ))}
       </div>

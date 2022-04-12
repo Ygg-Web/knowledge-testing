@@ -41,7 +41,6 @@ const initialState = {
 
 export const Constructor = () => {
   const [fields, setFields] = useState(initialState);
-  console.log(fields);
 
   const onSubmitHandler = (e) => e.preventDefault();
 
@@ -64,9 +63,6 @@ export const Constructor = () => {
 
     test.push(questionItem);
 
-    console.log(questionItem);
-    console.log(test);
-
     setFields((prev) => ({
       ...prev,
       test,
@@ -78,7 +74,6 @@ export const Constructor = () => {
   };
 
   const createClcikQuestion = () => {
-    console.log(fields.test);
     setFields(initialState);
     alert("Тест успешно создан!");
   };

@@ -13,4 +13,10 @@
   input{
     display: none;
   }
+  &.success label {
+    background:green;
+  }
+  &.failed label {
+    background: red;
+  }
 }

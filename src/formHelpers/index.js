@@ -15,6 +15,19 @@ export const validate = (value, validation = null) => {
 
   let isValid = true;
 
+  // switch (true) {
+  //   case validation.required:
+  //     isValid = value.trim() !== "" && isValid;
+  //     break;
+
+  //   case validation.minLength:
+  //     isValid = value.length >= validation.minLength && isValid;
+  //     break;
+  //   case validation.email:
+  //     isValid = validateEmail(value) && isValid;
+  //     break;
+  // }
+
   if (validation.required) {
     isValid = value.trim() !== "" && isValid;
   }

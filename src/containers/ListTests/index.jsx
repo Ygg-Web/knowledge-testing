@@ -76,7 +76,7 @@ const initialState = {
 export const ListTests = () => {
   const [state, setState] = useState(initialState);
   const { tests } = state;
-  console.log(tests);
+
   return (
     <>
       {state.loading ? (
