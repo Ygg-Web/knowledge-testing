@@ -3,6 +3,7 @@ import { Button } from "../../components/UI/Button";
 import { Input } from "../../components/UI/Input";
 import { Select } from "../../components/UI/Select";
 import { createControl, validate, validateForm } from "../../formHelpers";
+import { Axios } from "../../axios";
 
 const creatOptionControl = (number) => {
   return createControl(
@@ -35,7 +36,7 @@ const initialState = {
   test: [],
   formControls: createFormControls(),
   imgControls: "",
-  rightAnswerId: 1,
+  rightAnswerId: +1,
   isFormReady: false,
 };
 
@@ -54,10 +55,10 @@ export const Constructor = () => {
       question: question.value,
       rightAnswerId: fields.rightAnswerId,
       answers: [
+        { text: option1.value, id: option1.id },
         { text: option2.value, id: option2.id },
         { text: option3.value, id: option3.id },
         { text: option4.value, id: option4.id },
-        { text: option1.value, id: option1.id },
       ],
     };
 
@@ -73,9 +74,11 @@ export const Constructor = () => {
     }));
   };
 
-  const createClcikQuestion = () => {
-    setFields(initialState);
+  const createClcikQuestion = async () => {
     alert("Тест успешно создан!");
+
+    await Axios.post("/tests.json", fields.test);
+    setFields(initialState);
   };
 
   const selectChangeHandler = (e) => {
@@ -113,6 +116,34 @@ export const Constructor = () => {
     });
   };
 
+  // const onChangeDisk = (e) => {
+  //   console.log(e.target.value);
+  // };
+
+  // const DiscriptionTest = (
+  //   <div>
+  //     <div>
+  //       <label htmlFor="test">Название теста</label>
+  //       <input type="text" id="test" onChange={onChangeDisk} />
+  //     </div>
+
+  //     <div>
+  //       <label htmlFor="testAr">Краткое описание теста</label>
+  //       <textarea id="testAr" onChange={onChangeDisk} />
+  //     </div>
+
+  //     <div className="constructor__image">
+  //       <label htmlFor="file">Загрузить изображение</label>
+  //       <input className="input__file" type="file" id="file" />
+  //     </div>
+  //   </div>
+  // );
+
+  // const stepsCreateTest = {
+  //   0: DiscriptionTest,
+  //   1: ConfigureTest,
+  // };
+
   return (
     <div className="constructor">
       <div className="constructor__inner">
@@ -131,11 +162,6 @@ export const Constructor = () => {
               { text: 4, value: 4 },
             ]}
           />
-
-          <div className="constructor__image">
-            <label htmlFor="file">Загрузить изображение</label>
-            <input className="input__file" type="file" id="file" />
-          </div>
 
           <Button onClick={addClickQuestion}>Добавить вопрос</Button>
           <Button onClick={createClcikQuestion}>Создать тест</Button>

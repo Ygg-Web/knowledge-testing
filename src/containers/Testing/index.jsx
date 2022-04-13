@@ -1,55 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TestEnd } from "../../components/TestItem/TestEnd";
 import { Loader } from "../../components/UI/Loader";
 import { ActiveTestItem } from "../../components/TestItem/ActiveTestItem";
+import { Axios } from "../../axios";
+import { useParams } from "react-router-dom";
 
 const initialState = {
-  results: {},
-  isFinished: false,
+  test: [],
   activeQuestion: 0,
+  results: {},
   answerMark: null,
-  test: [
-    {
-      question: "название вопроса?",
-      rightAnswerId: 2,
-      id: 1,
-      answers: [
-        { text: "вариант ответа 1", id: 1 },
-        { text: "вариант ответа 2", id: 2 },
-        { text: "вариант ответа 3", id: 3 },
-        { text: "вариант ответа 4", id: 4 },
-      ],
-    },
-    {
-      question: "название вопросаasdasda?",
-      rightAnswerId: 2,
-      id: 2,
-      answers: [
-        { text: "вариант ответа 1", id: 1 },
-        { text: "вариант ответа 2", id: 2 },
-        { text: "вариант ответа 3", id: 3 },
-        { text: "вариант ответа 4", id: 4 },
-      ],
-    },
-    {
-      question: "название вопросаasdasdas?",
-      rightAnswerId: 3,
-      id: 3,
-
-      answers: [
-        { text: "вариант ответа 1", id: 1 },
-        { text: "вариант ответа 2", id: 2 },
-        { text: "вариант ответа 3", id: 3 },
-        { text: "вариант ответа 4", id: 4 },
-      ],
-    },
-  ],
+  isFinished: false,
+  loading: true,
 };
 
 export const Testing = () => {
   const [localState, setLocalState] = useState(initialState);
+  const { id } = useParams();
 
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    (async () => {
+      setLocalState((prev) => ({ ...prev, loading: true }));
+      const { data } = await Axios.get(`/tests/${id}.json`);
+      const test = await data;
+
+      setLocalState((prev) => ({
+        ...prev,
+        test,
+        loading: false,
+      }));
+    })();
+  }, [id]);
 
   const onClickAnswer = (answerId) => {
     if (localState.answerMark) {
@@ -59,18 +40,16 @@ export const Testing = () => {
       }
     }
 
-    console.log(answerId);
-    const question = localState.test[localState.activeQuestion];
+    const questionItem = localState.test[localState.activeQuestion];
     const results = localState.results;
 
-    if (question.rightAnswerId === answerId) {
-      if (!results[question.id]) {
-        results[question.id] = "success";
+    if (questionItem.rightAnswerId == answerId) {
+      if (!results[questionItem.id]) {
+        results[questionItem.id] = "success";
       }
 
       setLocalState((prev) => ({
         ...prev,
-        // results: { [answerId]: "success" },
         results,
         answerMark: { [answerId]: "success" },
       }));
@@ -91,10 +70,9 @@ export const Testing = () => {
         window.clearTimeout(timeout);
       }, 1000);
     } else {
-      results[question.id] = "failed";
+      results[questionItem.id] = "failed";
       setLocalState((prev) => ({
         ...prev,
-        // results: { [answerId]: "failed" },
         results,
         answerMark: { [answerId]: "failed" },
       }));
@@ -106,13 +84,19 @@ export const Testing = () => {
   };
 
   const onClickAgain = () => {
-    setLocalState(initialState);
+    setLocalState((prev) => ({
+      ...prev,
+      activeQuestion: 0,
+      results: {},
+      answerMark: null,
+      isFinished: false,
+    }));
   };
 
   return (
     <div className="question">
       <div className="question__inner">
-        {loading ? (
+        {localState.loading ? (
           <Loader />
         ) : localState.isFinished ? (
           <TestEnd
