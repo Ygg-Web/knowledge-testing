@@ -238,7 +238,7 @@ header{
 }
 .constructor__inner{
   width: 700px;
-  padding: 20px 40px;
+  padding: 30px 40px;
   border-radius: 20px;
   background:#221A37;
   h1{
@@ -246,23 +246,6 @@ header{
     margin: 0 0 50px;
   }
 
-  .constructor__image{
-    margin: 40px 0;
-    text-align: center;
-    label{
-      padding: 12px;
-      border: 1px solid #662DFC;
-      border-radius: 20px;
-      cursor: pointer;
-
-      &:hover{
-        background:#662DFC;
-      }
-    }
-    .input__file{
-      display: none;
-    }
-  }
 }
 
 // testdone preview
@@ -384,8 +367,6 @@ header{
   }
 }
 
-
-
 // view test
 
 .question{
@@ -450,4 +431,82 @@ header{
     }
   
   }
+}
+
+
+
+//DescriptionTest
+
+.discription{
+  margin: 70px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.discription__inner{
+  width: 700px;
+  padding: 30px 40px;
+  border-radius: 20px;
+  background:#221A37;
+
+  .discription__control{
+    margin: 30px 0;
+    font-size: 21px;
+    input{
+      width: 100%;
+      padding: 10px;
+      border:0;
+      outline: none;
+      font-size: 21px;
+      box-shadow:0 2px  10px 4px rgba(0,245,0,0.1);
+      border-radius: 5px;
+      color:#000;
+      font-family: inherit;
+    }
+
+    textarea{
+      max-width: 620px;
+      min-width: 620px;
+      min-height: 100px;
+      max-height: 200px;
+      padding: 10px;
+      border:0;
+      outline: none;
+      font-size: 21px;
+      box-shadow:0 2px  10px 4px rgba(0,245,0,0.1);
+      border-radius: 5px;
+      color:#000;
+      font-family: inherit;
+    }
+
+
+  }
+
+  .discription__image{
+    margin: 40px 0;
+    text-align: center;
+    label{
+      padding: 12px;
+      border: 1px solid #662DFC;
+      border-radius: 20px;
+      cursor: pointer;
+
+      &:hover{
+        background:#662DFC;
+      }
+    }
+    input{
+      display: none;
+    }
+  }
+
+
+  .discription__bottom{
+    display: flex;
+    justify-content: space-between;
+    button{
+      width: 200px;
+    }
+  }
+
 }
