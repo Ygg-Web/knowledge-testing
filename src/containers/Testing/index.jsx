@@ -22,7 +22,7 @@ export const Testing = () => {
     (async () => {
       setLocalState((prev) => ({ ...prev, loading: true }));
       const { data } = await Axios.get(`/tests/${id}.json`);
-      const test = await data;
+      const test = await data.unit;
 
       setLocalState((prev) => ({
         ...prev,
@@ -43,7 +43,7 @@ export const Testing = () => {
     const questionItem = localState.test[localState.activeQuestion];
     const results = localState.results;
 
-    if (questionItem.rightAnswerId == answerId) {
+    if (questionItem.rightAnswerId === answerId) {
       if (!results[questionItem.id]) {
         results[questionItem.id] = "success";
       }
@@ -76,6 +76,22 @@ export const Testing = () => {
         results,
         answerMark: { [answerId]: "failed" },
       }));
+
+      const timeout = window.setTimeout(() => {
+        if (isTestEnd()) {
+          setLocalState((prev) => ({
+            ...prev,
+            isFinished: true,
+          }));
+        } else {
+          setLocalState((prev) => ({
+            ...prev,
+            activeQuestion: localState.activeQuestion + 1,
+            answerMark: null,
+          }));
+        }
+        window.clearInterval(timeout);
+      }, 1000);
     }
   };
 

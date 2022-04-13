@@ -33,10 +33,14 @@ const createFormControls = () => {
 };
 
 const initialState = {
-  test: [],
+  test: {
+    name: "Имя теста",
+    discription: "краткое описание о чем тест",
+    image: "https://images6.alphacoders.com/488/thumb-1920-488158.jpg",
+    unit: [],
+  },
   formControls: createFormControls(),
-  imgControls: "",
-  rightAnswerId: +1,
+  rightAnswerId: Number(1),
   isFormReady: false,
 };
 
@@ -49,9 +53,9 @@ export const Constructor = () => {
     const { question, option1, option2, option3, option4 } =
       fields.formControls;
 
-    const test = fields.test.concat();
+    const unit = fields.test.unit.concat();
     const questionItem = {
-      id: test.length + 1,
+      id: unit.length + 1,
       question: question.value,
       rightAnswerId: fields.rightAnswerId,
       answers: [
@@ -62,13 +66,12 @@ export const Constructor = () => {
       ],
     };
 
-    test.push(questionItem);
+    unit.push(questionItem);
 
     setFields((prev) => ({
       ...prev,
-      test,
+      test: { ...prev.test, unit },
       formControls: createFormControls(),
-      imgControls: "",
       rightAnswerId: 1,
       isFormReady: false,
     }));
