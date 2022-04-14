@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Button } from "../../components/UI/Button";
 import { Input } from "../../components/UI/Input";
 import { createControl, validate, validateForm } from "../../formHelpers";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { auth } from "../../redux/actions/auth";
 
 const initialState = {
   formControls: {
@@ -28,10 +29,9 @@ const initialState = {
 
 export const Auth = () => {
   const [localState, setLocalState] = useState(initialState);
+  const dispatch = useDispatch();
 
-  const onSumbmitHandler = (e) => {
-    e.preventDefault();
-  };
+  const onSumbmitHandler = (e) => e.preventDefault();
 
   const onChanheHandler = (e, conrolField) => {
     const formControls = { ...localState.formControls };
@@ -50,35 +50,24 @@ export const Auth = () => {
     }));
   };
 
-  const loginHandler = async () => {
-    const authData = {
-      email: localState.formControls.email.value,
-      password: localState.formControls.password.value,
-      returnSecureToken: true,
-    };
-    try {
-      await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDULKurhxIEGxtxAzwl5CNGthK33_ZIZKU",
-        authData
-      );
-    } catch (e) {
-      alert("Ошибка при входе. Попробуйте еще раз");
-    }
+  const loginHandler = () => {
+    dispatch(
+      auth(
+        localState.formControls.email.value,
+        localState.formControls.password.value,
+        true
+      )
+    );
   };
-  const registerHandler = async () => {
-    const authData = {
-      email: localState.formControls.email.value,
-      password: localState.formControls.password.value,
-      returnSecureToken: true,
-    };
-    try {
-      await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDULKurhxIEGxtxAzwl5CNGthK33_ZIZKU",
-        authData
-      );
-    } catch (e) {
-      alert("Ошибка, не удалось авторизоваться. Попробуйте еще раз");
-    }
+
+  const registerHandler = () => {
+    dispatch(
+      auth(
+        localState.formControls.email.value,
+        localState.formControls.password.value,
+        false
+      )
+    );
   };
 
   const renderFormControls = () => {

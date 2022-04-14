@@ -12,8 +12,14 @@ import { Constructor } from "./containers/Constructor";
 import { PreviewTest } from "./containers/PreviewTest";
 import { Auth } from "./containers/Auth";
 import { Testing } from "./containers/Testing";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {});
+
   return (
     <>
       <Router>

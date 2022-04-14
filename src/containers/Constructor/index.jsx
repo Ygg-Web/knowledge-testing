@@ -10,7 +10,6 @@ const stepsConfigTest = {
 export const Constructor = () => {
   const step = useSelector(({ maker }) => maker.step);
   const Step = stepsConfigTest[step];
-  console.log(step);
 
   return (
     <div className="constructor">

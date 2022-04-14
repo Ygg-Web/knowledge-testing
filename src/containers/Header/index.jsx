@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/auth";
 
 export const Header = () => {
+  const isAuth = useSelector(({ auth }) => !!auth.token);
+  const dispatch = useDispatch();
+  console.log(isAuth);
+
   return (
     <header>
       <div className="container">
@@ -28,12 +34,21 @@ export const Header = () => {
               </li>
             </ul>
           </nav>
-          <Link to="/auth">
-            <div className="header__login">
-              <img src="/assets/login.png" alt="login" />
-              Вход
-            </div>
-          </Link>
+          {isAuth ? (
+            <Link to="/">
+              <div className="header__login" onClick={() => dispatch(logout())}>
+                <img src="/assets/logout.png" alt="logout" />
+                Выход
+              </div>
+            </Link>
+          ) : (
+            <Link to="/auth">
+              <div className="header__login">
+                <img src="/assets/login1.png" alt="login" />
+                Вход
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </header>
