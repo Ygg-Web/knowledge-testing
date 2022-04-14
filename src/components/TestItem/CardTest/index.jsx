@@ -12,7 +12,7 @@ export const CardTest = ({ test }) => {
             <h2 className="item__title">{test.name}</h2>
           </Link>
           <div className="item__text">
-            <p>{test.discription}</p>
+            <p>{test.description}</p>
           </div>
         </div>
         <div className="item__bottom">

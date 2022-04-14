@@ -1,21 +1,16 @@
-import React, { useState } from "react";
-import { DiscriptionTest } from "../../components/StepConstructor/DiscriptionTest";
+import { DescriptionTest } from "../../components/StepConstructor/DescriptionTest";
 import { ConfigureTest } from "../../components/StepConstructor/ConfigureTest";
+import { useSelector } from "react-redux";
 
-const stepsCreateTest = {
-  0: DiscriptionTest,
+const stepsConfigTest = {
+  0: DescriptionTest,
   1: ConfigureTest,
 };
 
 export const Constructor = () => {
-  const [step, setStep] = useState(0);
-  const Step = stepsCreateTest[step];
-
-  const nextStep = () => {
-    setStep((prev) => prev + 1);
-  };
-
-  //прокинуть контекс
+  const step = useSelector(({ maker }) => maker.step);
+  const Step = stepsConfigTest[step];
+  console.log(step);
 
   return (
     <div className="constructor">

@@ -41,15 +41,13 @@ export const fetchTests = () => async (dispatch) => {
       tests.push({
         id: key,
         name: value.name,
-        discription: value.discription,
+        description: value.description,
         image: value.image,
       });
     });
 
     dispatch(setTests(tests));
-  } catch (e) {
-    alert("Ошибка, не удалось получить данные от сервера!");
-  }
+  } catch (e) {}
 
   dispatch(setLoaded(false));
 };
@@ -89,7 +87,7 @@ export const clickAnswerInTest = (answerId) => (dispatch, getState) => {
   const questionItem = state.test[state.activeQuestion];
   const results = state.results;
 
-  if (questionItem.rightAnswerId == answerId) {
+  if (Number(questionItem.rightAnswerId) === answerId) {
     if (!results[questionItem.id]) {
       results[questionItem.id] = "success";
     }

@@ -18,6 +18,10 @@ export const Testing = () => {
   useEffect(() => {
     console.log("123");
     dispatch(fetchTestById(id));
+
+    return () => {
+      dispatch(goTestAgain);
+    };
   }, []);
 
   const onClickAnswerId = useCallback((id) => {

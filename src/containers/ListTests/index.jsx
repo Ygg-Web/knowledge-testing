@@ -17,6 +17,8 @@ export const ListTests = () => {
     <>
       {loading ? (
         <Loader />
+      ) : !tests.length ? (
+        <h2>Тесты отсутствуют.</h2>
       ) : (
         <div className="tests__list">
           {tests.map((test, index) => (
