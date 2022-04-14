@@ -1,4 +1,3 @@
-import React from "react";
 import { AnswerItem } from "../AnswerItem";
 
 export const ActiveTestItem = (props) => {

@@ -1,29 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { CardTest } from "../../components/TestItem/CardTest";
 import { Loader } from "../../components/UI/Loader";
-import { Axios } from "../../axios";
+
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTests } from "../../redux/actions/test";
 
 export const ListTests = () => {
-  const [state, setState] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { tests, loading } = useSelector(({ test }) => test);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      const { data } = await Axios.get("/tests.json");
-      const tests = [];
-
-      Object.entries(data).forEach(([key, value]) => {
-        tests.push({
-          id: key,
-          name: value.name,
-          discription: value.discription,
-          image: value.image,
-        });
-      });
-
-      setLoading(false);
-      setState(tests);
-    })();
+    dispatch(fetchTests());
   }, []);
 
   return (
@@ -32,7 +19,7 @@ export const ListTests = () => {
         <Loader />
       ) : (
         <div className="tests__list">
-          {state.map((test, index) => (
+          {tests.map((test, index) => (
             <CardTest key={test.id + index} test={test} />
           ))}
         </div>

@@ -9,7 +9,7 @@ export const AnswerItem = ({ answer, onClick, answerMark }) => {
 
   return (
     <div className={cls.join(" ")}>
-      <label onClick={(e) => onClick(answer.id)} htmlFor={nameId}>
+      <label onClick={() => onClick(answer.id)} htmlFor={nameId}>
         {answer.text}
       </label>
       <input type="radio" name="answer" id={nameId} value={answer.id} />

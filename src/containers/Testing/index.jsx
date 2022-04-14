@@ -1,133 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { TestEnd } from "../../components/TestItem/TestEnd";
 import { Loader } from "../../components/UI/Loader";
 import { ActiveTestItem } from "../../components/TestItem/ActiveTestItem";
-import { Axios } from "../../axios";
 import { useParams } from "react-router-dom";
-
-const initialState = {
-  test: [],
-  activeQuestion: 0,
-  results: {},
-  answerMark: null,
-  isFinished: false,
-  loading: true,
-};
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchTestById,
+  clickAnswerInTest,
+  goTestAgain,
+} from "../../redux/actions/test";
 
 export const Testing = () => {
-  const [localState, setLocalState] = useState(initialState);
+  const state = useSelector(({ test }) => test);
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
-    (async () => {
-      setLocalState((prev) => ({ ...prev, loading: true }));
-      const { data } = await Axios.get(`/tests/${id}.json`);
-      const test = await data.unit;
+    console.log("123");
+    dispatch(fetchTestById(id));
+  }, []);
 
-      setLocalState((prev) => ({
-        ...prev,
-        test,
-        loading: false,
-      }));
-    })();
-  }, [id]);
+  const onClickAnswerId = useCallback((id) => {
+    dispatch(clickAnswerInTest(id));
+  }, []);
 
-  const onClickAnswer = (answerId) => {
-    if (localState.answerMark) {
-      const key = Object.keys(localState.answerMark)[0];
-      if (localState.answerMark[key] === "success") {
-        return;
-      }
-    }
-
-    const questionItem = localState.test[localState.activeQuestion];
-    const results = localState.results;
-
-    if (questionItem.rightAnswerId === answerId) {
-      if (!results[questionItem.id]) {
-        results[questionItem.id] = "success";
-      }
-
-      setLocalState((prev) => ({
-        ...prev,
-        results,
-        answerMark: { [answerId]: "success" },
-      }));
-
-      const timeout = window.setTimeout(() => {
-        if (isTestEnd()) {
-          setLocalState((prev) => ({
-            ...prev,
-            isFinished: true,
-          }));
-        } else {
-          setLocalState((prev) => ({
-            ...prev,
-            activeQuestion: localState.activeQuestion + 1,
-            answerMark: null,
-          }));
-        }
-        window.clearTimeout(timeout);
-      }, 1000);
-    } else {
-      results[questionItem.id] = "failed";
-      setLocalState((prev) => ({
-        ...prev,
-        results,
-        answerMark: { [answerId]: "failed" },
-      }));
-
-      const timeout = window.setTimeout(() => {
-        if (isTestEnd()) {
-          setLocalState((prev) => ({
-            ...prev,
-            isFinished: true,
-          }));
-        } else {
-          setLocalState((prev) => ({
-            ...prev,
-            activeQuestion: localState.activeQuestion + 1,
-            answerMark: null,
-          }));
-        }
-        window.clearInterval(timeout);
-      }, 1000);
-    }
-  };
-
-  const isTestEnd = () => {
-    return localState.activeQuestion + 1 === localState.test.length;
-  };
-
-  const onClickAgain = () => {
-    setLocalState((prev) => ({
-      ...prev,
-      activeQuestion: 0,
-      results: {},
-      answerMark: null,
-      isFinished: false,
-    }));
-  };
+  const onAgain = useCallback(() => {
+    dispatch(goTestAgain());
+  }, []);
 
   return (
     <div className="question">
       <div className="question__inner">
-        {localState.loading ? (
+        {state.loading || !state.test.length ? (
           <Loader />
-        ) : localState.isFinished ? (
+        ) : state.isFinished ? (
           <TestEnd
-            results={localState.results}
-            test={localState.test}
-            onAgain={onClickAgain}
+            results={state.results}
+            test={state.test}
+            onAgain={onAgain}
           />
         ) : (
           <ActiveTestItem
-            question={localState.test[localState.activeQuestion].question}
-            answers={localState.test[localState.activeQuestion].answers}
-            onClick={onClickAnswer}
-            lengthTest={localState.test.length}
-            numberAnswer={localState.activeQuestion + 1}
-            answerMark={localState.answerMark}
+            question={state.test[state.activeQuestion].question}
+            answers={state.test[state.activeQuestion].answers}
+            onClick={onClickAnswerId}
+            lengthTest={state.test.length}
+            numberAnswer={state.activeQuestion + 1}
+            answerMark={state.answerMark}
           />
         )}
       </div>
