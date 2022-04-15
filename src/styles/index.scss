@@ -508,5 +508,68 @@ header{
       width: 200px;
     }
   }
-
 }
+
+.registration{
+  // position: relative;
+}
+.registration__form{
+  margin: 70px auto;
+  width: 700px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  background :#221A37;
+  border-radius: 10px;
+  h1{
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .form__controls{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .form__input{
+    margin: 20px 20px 20px 0;
+    width: 300px;
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+
+    label{
+      display: inline-block;
+      margin: 0 0 5px 10px;
+    }
+    &.invalid label{
+      color: #EE5151;
+    }
+
+    input{
+      width: 100%;
+      font-family: inherit;
+      font-size: 20px;
+      padding: 10px;
+      border: 2px solid #B396FD;
+      border-radius:20px;
+      background: none;
+      color: #fff;
+      outline: none;
+      transition: 0.25s;
+      &:focus{
+        border-color: #27AE60;
+      }
+    }
+    &.invalid input{
+      border-color: #EE5151;
+      color: #EE5151;
+    }
+  }
+  button{
+    max-width: 250px;
+  }
+}
+

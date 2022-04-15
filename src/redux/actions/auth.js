@@ -21,7 +21,7 @@ export const autoLogout = (time) => (dispatch) => {
 };
 
 export const autoLogin = () => (dispatch) => {
-  const token = localStorage.getTime("token");
+  const token = localStorage.getItem("token");
   if (!token) {
     dispatch(logout());
   } else {
