@@ -2,21 +2,18 @@ import { Link } from "react-router-dom";
 
 export const CardTest = ({ test }) => {
   return (
-    <div className="test__item">
-      <div className="item__inner">
+    <div className="card">
+      <Link to={`/test/${test.id}`}>
+        <img src={test.image} alt="drawing" />
+      </Link>
+      <div className="card__body">
         <Link to={`/test/${test.id}`}>
-          <img className="item__image" src={test.image} alt="drawing" />
+          <h2>{test.name}</h2>
         </Link>
-        <div className="item__body">
-          <Link to={`/test/${test.id}`}>
-            <h2 className="item__title">{test.name}</h2>
-          </Link>
-          <div className="item__text">
-            <p>{test.description}</p>
-          </div>
-        </div>
-        <div className="item__bottom">
-          {/* <div className="item__rating">
+        <p>{test.description}</p>
+      </div>
+      <div className="card__bottom">
+        {/* <div className="item__rating">
             <i>{test.rating}</i>
           </div>
           <div className="item__limit">
@@ -28,7 +25,6 @@ export const CardTest = ({ test }) => {
               <img src={test.author.avatar} alt="avatar" />
             </div>
           </Link> */}
-        </div>
       </div>
     </div>
   );

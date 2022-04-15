@@ -5,13 +5,13 @@ export const ActiveTestItem = (props) => {
     <>
       <div className="question__title">
         <h3>
-          <strong>{props.numberAnswer}.</strong>&nbsp;{props.question}
+          {props.numberAnswer}.&nbsp;{props.question}
         </h3>
         <small>
           {props.numberAnswer}/{props.lengthTest}
         </small>
       </div>
-      <div className="answer__body">
+      <div className="answers">
         <h4>Выберите правильный вариант:</h4>
         {props.answers.map((answer, index) => (
           <AnswerItem

@@ -4,6 +4,7 @@ import { Loader } from "../../components/UI/Loader";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTests } from "../../redux/actions/test";
+import { EmptyList } from "../../components/EmptyList";
 
 export const ListTests = () => {
   const { tests, loading } = useSelector(({ test }) => test);
@@ -18,7 +19,7 @@ export const ListTests = () => {
       {loading ? (
         <Loader />
       ) : !tests.length ? (
-        <h2>Тесты отсутствуют.</h2>
+        <EmptyList />
       ) : (
         <div className="tests__list">
           {tests.map((test, index) => (

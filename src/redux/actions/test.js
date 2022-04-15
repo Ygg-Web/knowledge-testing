@@ -56,22 +56,19 @@ export const goTestAgain = () => ({
   type: "GO_TEST_AGAIN",
 });
 
-export const fetchTestById = (id) => async (dispatch) => {
+const isTestEnd = (state) => {
+  return state.activeQuestion + 1 === state.test.unit.length;
+};
+
+export const fetchAllTestById = (id) => async (dispatch) => {
   dispatch(setLoaded(true));
   try {
     const { data } = await Axios.get(`/tests/${id}.json`);
-    const test = await data.unit;
-
-    dispatch(setTest(test));
+    dispatch(setTest(data));
   } catch (e) {
-    alert("Ошибка не удалось получить данные от сервера!");
+    alert("Ошибка при загрузке теста от сервера");
   }
-
   dispatch(setLoaded(false));
-};
-
-const isTestEnd = (state) => {
-  return state.activeQuestion + 1 === state.test.length;
 };
 
 export const clickAnswerInTest = (answerId) => (dispatch, getState) => {
@@ -84,7 +81,7 @@ export const clickAnswerInTest = (answerId) => (dispatch, getState) => {
     }
   }
 
-  const questionItem = state.test[state.activeQuestion];
+  const questionItem = state.test.unit[state.activeQuestion];
   const results = state.results;
 
   if (Number(questionItem.rightAnswerId) === answerId) {

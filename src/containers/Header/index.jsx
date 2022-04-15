@@ -6,7 +6,6 @@ import { logout } from "../../redux/actions/auth";
 export const Header = () => {
   const isAuth = useSelector(({ auth }) => !!auth.token);
   const dispatch = useDispatch();
-  console.log(isAuth);
 
   return (
     <header>

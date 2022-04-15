@@ -1,6 +1,6 @@
 const initialState = {
   tests: [],
-  test: [],
+  test: null,
   activeQuestion: 0,
   results: {},
   answerMark: null,
