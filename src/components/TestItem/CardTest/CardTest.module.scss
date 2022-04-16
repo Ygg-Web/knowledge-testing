@@ -3,8 +3,13 @@
   margin: 10px; 
   background:#221A37; // * test
   border-radius: 20px; // * test
+  .image{
+    width: 100%;
+    height: 250px;
+  }
   img{ // * test
     max-width: 100%;
+    height: 100%;
     object-fit: cover;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;

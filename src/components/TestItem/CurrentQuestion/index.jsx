@@ -12,7 +12,7 @@ export const CurrentQuestion = (props) => {
           {props.numberAnswer}/{props.lengthTest}
         </small>
       </div>
-      <div className="answers">
+      <div className={classes.body}>
         <h4>Выберите правильный вариант:</h4>
         {props.answers.map((answer, index) => (
           <AnswerItem

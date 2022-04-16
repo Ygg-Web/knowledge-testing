@@ -5,7 +5,7 @@ import classes from "./EmptyList.module.scss";
 export const EmptyList = () => {
   return (
     <div className={classes.emptiness}>
-      <div className="emptiness__body">
+      <div className={classes.body}>
         <h1>Добро пожаловать!</h1>
         <p>
           Текущий список тестов пуст. Для создания своего неповторимого теста,

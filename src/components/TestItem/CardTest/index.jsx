@@ -5,7 +5,9 @@ export const CardTest = ({ test }) => {
   return (
     <div className={classes.card}>
       <Link to={`/test/${test.id}`}>
-        <img src={test.image} alt="drawing" />
+        <div className={classes.image}>
+          <img src={test.image} alt="drawing" />
+        </div>
       </Link>
       <div className={classes.body}>
         <Link to={`/test/${test.id}`}>

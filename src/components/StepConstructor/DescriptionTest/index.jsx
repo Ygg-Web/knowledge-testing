@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { createControl, validate } from "../../../formHelpers";
+import { createControl, updateChangedValue } from "../../../formHelpers";
 import { Button } from "../../UI/Button";
 import { Input } from "../../UI/Input";
 import { Textarea } from "../../UI/Textarea";
@@ -25,56 +25,29 @@ const initialState = {
     { required: true, minLength: 10 }
   ),
   imageControl: "",
-  isFormReady: false, // подумать над блок кнопок до запол полей
 };
 
 export const DescriptionTest = () => {
   const [localState, setLocalState] = useState(initialState);
   const dispatch = useDispatch();
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-  };
+  const onSubmitHandler = (e) => e.preventDefault();
 
-  const updateChangedValue = (e, controlField, prevControls) => {
-    //сделать и для нескольких контролов и для одного через if (если поле с контролами есть то го, иначе один)
-    const nextControls = { ...prevControls };
-
-    nextControls.value = e.target.value;
-    nextControls.touched = true;
-    nextControls.valid = validate(nextControls.value, nextControls.validation);
-
-    // const control = { ...nextControls[controlField] }; // когда есть контролы
-    // nextControls[controlField] = nextControls;
-
-    return nextControls;
-  };
-
-  const inputChangeHandler = (e, controlField) => {
-    const nextControls = updateChangedValue(
-      e,
-      controlField,
-      localState.inputControl
-    );
+  const inputChangeHandler = (e, prevState) => {
+    const nextControl = updateChangedValue(e, prevState);
 
     setLocalState((prev) => ({
       ...prev,
-      inputControl: nextControls,
-      isFormReady: true,
+      inputControl: nextControl,
     }));
   };
 
-  const textareaChangeHandler = (e, controlField) => {
-    const nextControls = updateChangedValue(
-      e,
-      controlField,
-      localState.textareaControl
-    );
+  const textareaChangeHandler = (e, prevControls) => {
+    const nextControl = updateChangedValue(e, prevControls);
 
     setLocalState((prev) => ({
       ...prev,
-      textareaControl: nextControls,
-      isFormReady: true,
+      textareaControl: nextControl,
     }));
   };
 
@@ -88,9 +61,7 @@ export const DescriptionTest = () => {
     };
   };
 
-  const onClickBack = () => {
-    setLocalState(initialState);
-  };
+  const onClickBack = () => setLocalState(initialState);
 
   const onClickNextStep = () => {
     const descriptionTest = {
@@ -104,7 +75,7 @@ export const DescriptionTest = () => {
     setLocalState(initialState);
   };
 
-  let isFormReady = (() => {
+  const isFormReady = (() => {
     return localState.inputControl.valid && localState.textareaControl.valid;
   })();
 
@@ -118,6 +89,7 @@ export const DescriptionTest = () => {
       <Input
         control={localState.inputControl}
         onChange={(e) => inputChangeHandler(e, localState.inputControl)}
+        typeStyle="default"
       />
 
       <Textarea

@@ -15,19 +15,6 @@ export const validate = (value, validation = null) => {
 
   let isValid = true;
 
-  // switch (true) {
-  //   case validation.required:
-  //     isValid = value.trim() !== "" && isValid;
-  //     break;
-
-  //   case validation.minLength:
-  //     isValid = value.length >= validation.minLength && isValid;
-  //     break;
-  //   case validation.email:
-  //     isValid = validateEmail(value) && isValid;
-  //     break;
-  // }
-
   if (validation.required) {
     isValid = value.trim() !== "" && isValid;
   }
@@ -60,3 +47,22 @@ function validateEmail(email) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 }
+
+export const updateChangedValue = (e, prevState, controlField = null) => {
+  const updateState = { ...prevState };
+  //если несколько полей для контроля
+  if (controlField) {
+    const control = { ...updateState[controlField] };
+    control.value = e.target.value;
+    control.touched = true;
+    control.valid = validate(updateState.value, updateState.validation);
+    updateState[controlField] = control;
+    return updateState;
+    // для одного поля
+  } else {
+    updateState.value = e.target.value;
+    updateState.touched = true;
+    updateState.valid = validate(updateState.value, updateState.validation);
+    return updateState;
+  }
+};

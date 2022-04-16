@@ -22,6 +22,24 @@ export const Input = ({ control, onChange, typeStyle }) => {
   );
 };
 
+export const renderInputControlsForForm = (
+  controlFields,
+  onChange,
+  typeStyle
+) => {
+  return Object.keys(controlFields).map((controlField, index) => {
+    const control = controlFields[controlField];
+    return (
+      <Input
+        key={controlField + index}
+        control={control}
+        onChange={(e) => onChange(e, controlFields, controlField)}
+        typeStyle={typeStyle}
+      />
+    );
+  });
+};
+
 function isInvalid({ valid, touched, validation }) {
   return !valid && !!validation && touched;
 }

@@ -37,7 +37,9 @@ export const PreviewTest = () => {
         <Loader />
       ) : (
         <div className={classes.test}>
-          <img src={state.test.image} alt="test-img" />
+          <div className={classes.image}>
+            <img src={state.test.image} alt="test-img" />
+          </div>
           <div className={classes.body}>
             <div className={classes.content}>
               <h2>{state.test.name}</h2>

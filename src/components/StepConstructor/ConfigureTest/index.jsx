@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../UI/Button";
-import { Input } from "../../UI/Input";
+import { renderInputControlsForForm } from "../../UI/Input";
 import { Select } from "../../UI/Select";
-import { createControl, validate, validateForm } from "../../../formHelpers";
+import {
+  createControl,
+  validateForm,
+  updateChangedValue,
+} from "../../../formHelpers";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addQuestionInUnit,
@@ -11,6 +15,7 @@ import {
 } from "../../../redux/actions/maker";
 
 import classes from "./ConfigureTest.module.scss";
+import { Link } from "react-router-dom";
 
 const creatOptionControl = (number) => {
   return createControl(
@@ -80,6 +85,7 @@ export const ConfigureTest = () => {
 
   const createClcikQuestion = () => {
     dispatch(createUnitWithQuestion());
+    alert("Тест успешно создан!");
     setLocalState(initialState);
   };
 
@@ -87,40 +93,23 @@ export const ConfigureTest = () => {
     setLocalState((prev) => ({ ...prev, rightAnswerId: e.target.value }));
   };
 
-  const inputChangeHandler = (e, controlField) => {
-    const formControls = { ...localState.formControls };
-    const control = { ...formControls[controlField] };
-
-    control.value = e.target.value;
-    control.touched = true;
-    control.valid = validate(control.value, control.validation);
-
-    formControls[controlField] = control;
+  const inputChangeHandler = (e, prevState, controlField) => {
+    const nextControls = updateChangedValue(e, prevState, controlField);
 
     setLocalState((prev) => ({
       ...prev,
-      formControls,
-      isFormReady: validateForm(formControls),
+      formControls: nextControls,
+      isFormReady: validateForm(nextControls),
     }));
-  };
-
-  const renderFormControls = () => {
-    return Object.keys(localState.formControls).map((conrolField, index) => {
-      const control = localState.formControls[conrolField];
-
-      return (
-        <Input
-          key={conrolField + index}
-          control={control}
-          onChange={(e) => inputChangeHandler(e, conrolField)}
-        />
-      );
-    });
   };
 
   return (
     <form className={classes.configuration} onSubmit={onSubmitHandler}>
-      {renderFormControls()}
+      {renderInputControlsForForm(
+        localState.formControls,
+        inputChangeHandler,
+        "default"
+      )}
 
       <Select
         label="Выберите правильный ответ"
@@ -137,9 +126,14 @@ export const ConfigureTest = () => {
         <Button onClick={addClickQuestion} disabled={!localState.isFormReady}>
           Добавить вопрос
         </Button>
-        <Button onClick={createClcikQuestion} disabled={test.unit.length === 0}>
-          Создать тест
-        </Button>
+        <Link to="/">
+          <Button
+            onClick={createClcikQuestion}
+            disabled={test.unit.length === 0}
+          >
+            Создать тест
+          </Button>
+        </Link>
       </div>
     </form>
   );
