@@ -10,6 +10,7 @@ import {
 import { StartTest } from "../../components/StartTest";
 import { Modal } from "../../components/UI/Modal";
 import { Loader } from "../../components/UI/Loader";
+import classes from "./PreviewTest.module.scss";
 
 export const PreviewTest = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -35,14 +36,14 @@ export const PreviewTest = () => {
       {state.loading || !state.test ? (
         <Loader />
       ) : (
-        <div className="test">
+        <div className={classes.test}>
           <img src={state.test.image} alt="test-img" />
-          <div className="test__body">
-            <div className="test__content">
+          <div className={classes.body}>
+            <div className={classes.content}>
               <h2>{state.test.name}</h2>
               <p>{state.test.description}</p>
             </div>
-            <div className="test__bottom">
+            <div className={classes.bottom}>
               <p>количество вопросов - {state.test.unit.length}</p>
               <Button onClick={() => setModalActive(true)}>Поехали!</Button>
             </div>

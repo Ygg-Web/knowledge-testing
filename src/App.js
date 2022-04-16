@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Container } from "./hoc/Layout/Container";
+import { Container } from "./hoc/Container";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,6 +16,8 @@ import { autoLogin } from "./redux/actions/auth";
 import { Registration } from "./components/Registratiion";
 import { EmptyList } from "./components/EmptyList";
 import { PreviewTest } from "./containers/PreviewTest";
+import { ConfigureTest } from "./components/StepConstructor/ConfigureTest";
+import { TestHeader } from "./components/TestItem/TestHeader";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +32,9 @@ function App() {
         <Header />
         <Container>
           <Routes>
+            <Route path="/hed" element={<TestHeader />} />
+
+            <Route path="/constructor/1" element={<ConfigureTest />} />
             <Route path="/" element={<ListTests />} />
             <Route path="/test/:id" element={<PreviewTest />} />
             <Route path="/constructor" element={<Constructor />} />

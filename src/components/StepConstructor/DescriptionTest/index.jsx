@@ -7,6 +7,7 @@ import { Textarea } from "../../UI/Textarea";
 import { nextStepConfig } from "../../../redux/actions/maker";
 import { useDispatch } from "react-redux";
 import { addDescriptionTest } from "../../../redux/actions/maker";
+import classes from "./DescriptionTest.module.scss";
 
 const initialState = {
   inputControl: createControl(
@@ -107,8 +108,13 @@ export const DescriptionTest = () => {
     return localState.inputControl.valid && localState.textareaControl.valid;
   })();
 
+  const img = {
+    type: "file",
+    label: "Загрузить изображение",
+  };
+
   return (
-    <form onSubmit={onSubmitHandler}>
+    <form className={classes.description} onSubmit={onSubmitHandler}>
       <Input
         control={localState.inputControl}
         onChange={(e) => inputChangeHandler(e, localState.inputControl)}
@@ -119,12 +125,9 @@ export const DescriptionTest = () => {
         onChange={(e) => textareaChangeHandler(e, localState.textareaControl)}
       />
 
-      <div className="discription__image">
-        <label htmlFor="file">Загрузить изображение</label>
-        <input type="file" id="file" onChange={imageChangeHandler} />
-      </div>
+      <Input control={img} onChange={imageChangeHandler} typeStyle={"image"} />
 
-      <div className="discription__bottom">
+      <div className={classes.buttons}>
         <Link to="/">
           <Button onClick={onClickBack}>Назад</Button>
         </Link>

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { CardTest } from "../../components/TestItem/CardTest";
-import { Loader } from "../../components/UI/Loader";
-
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTests } from "../../redux/actions/test";
+import { Loader } from "../../components/UI/Loader";
+import { CardTest } from "../../components/TestItem/CardTest";
 import { EmptyList } from "../../components/EmptyList";
+
+import classes from "./ListTest.module.scss";
 
 export const ListTests = () => {
   const { tests, loading } = useSelector(({ test }) => test);
@@ -21,7 +22,7 @@ export const ListTests = () => {
       ) : !tests.length ? (
         <EmptyList />
       ) : (
-        <div className="tests__list">
+        <div className={classes.list}>
           {tests.map((test, index) => (
             <CardTest key={test.id + index} test={test} />
           ))}

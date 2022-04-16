@@ -1,12 +1,13 @@
-import { AnswerItem } from "../AnswerItem";
+import { AnswerItem } from "./AnswerItem";
+import classes from "./CurrentQuestion.module.scss";
 
-export const ActiveTestItem = (props) => {
+export const CurrentQuestion = (props) => {
   return (
     <>
-      <div className="question__title">
-        <h3>
+      <div className={classes.title}>
+        <h2>
           {props.numberAnswer}.&nbsp;{props.question}
-        </h3>
+        </h2>
         <small>
           {props.numberAnswer}/{props.lengthTest}
         </small>

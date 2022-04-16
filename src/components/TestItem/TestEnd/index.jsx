@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../UI/Button";
 import classes from "./TestEnd.module.scss";
@@ -34,10 +33,12 @@ export const TestEnd = ({ results, test, onAgain }) => {
           );
         })}
       </div>
-      <Button onClick={onAgain}>Еще раз!</Button>
-      <Link to="/">
-        <Button>Завершить!</Button>
-      </Link>
+      <div className={classes.buttons}>
+        <Button onClick={onAgain}>Еще раз!</Button>
+        <Link to="/">
+          <Button>Завершить!</Button>
+        </Link>
+      </div>
     </div>
   );
 };

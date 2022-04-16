@@ -1,0 +1,84 @@
+.card{
+  width: 450px;
+  margin: 10px; 
+  background:#221A37; // * test
+  border-radius: 20px; // * test
+  img{ // * test
+    max-width: 100%;
+    object-fit: cover;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  .body{
+    padding: 30px;
+    // border-bottom: 1px solid #B396FD;
+      h2{
+        margin: 0 0 10px 0;
+        font-size: 23px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: .2s;
+        &:hover{
+          color: #662DFC
+        }
+      }
+      p{
+      font-size: 18px;
+      color: #27AE60;
+      }
+  }
+}
+
+// .card__bottom{
+  //   padding: 20px;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+
+  //   .item__rating{
+  //     margin-left: 40px;
+  //     position: relative;
+  //     width: 30px;
+  //       &:before{
+  //         content: '';
+  //         width: 25px;
+  //         height: 25px;
+  //         position: absolute;
+  //         left: -35px;
+  //         top: -3px;
+  //         background: url("../../public/assets/like3.svg") center / cover no-repeat;
+  //         background-size: 25px 25px;
+  //       }
+  //   }
+
+  //   .item__limit{
+  //     position: relative;
+  //     width: 30px;
+  //     &:before{
+  //       content: '';
+  //       width: 25px;
+  //       height: 25px;
+  //       position: absolute;
+  //       left: -35px;
+  //       top: -3px;
+  //       background: url("../../public/assets/count1.svg") center / cover no-repeat;
+  //       background-size: 25px 25px;
+  //     }
+  //   }
+
+  //   .item__profile{
+  //     display: flex;
+  //     flex-direction: row;
+  //     align-items:center;
+  //     i{
+  //       display: inline-block;
+  //       margin: 10px 20px;
+  //     }
+  //     img{
+  //       width: 50px;
+  //       height: 50px;
+  //       border-radius: 50%;
+  //       object-fit: cover;
+  //     }

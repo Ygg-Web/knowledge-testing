@@ -4,6 +4,7 @@ import { Input } from "../../components/UI/Input";
 import { createControl, validate, validateForm } from "../../formHelpers";
 import { useDispatch } from "react-redux";
 import { auth } from "../../redux/actions/auth";
+import classes from "./Auth.module.scss";
 
 const initialState = {
   formControls: {
@@ -78,30 +79,26 @@ export const Auth = () => {
           key={controlField + index}
           control={control}
           onChange={(e) => onChanheHandler(e, controlField)}
+          typeStyle={"registration"}
         />
       );
     });
   };
 
   return (
-    <div className="authorization">
-      <div className="authorization__inner">
-        <h1>Авторизация</h1>
-        <form onSubmit={onSumbmitHandler}>
-          {renderFormControls()}
-          <div className="authorization__buttons">
-            <Button onClick={loginHandler} disabled={!localState.isFormReady}>
-              Войти
-            </Button>
-            <Button
-              onClick={registerHandler}
-              disabled={!localState.isFormReady}
-            >
-              Зарегистрироваться
-            </Button>
-          </div>
-        </form>
-      </div>
+    <div className={classes.authorization}>
+      <h1>Авторизация</h1>
+      <form onSubmit={onSumbmitHandler}>
+        {renderFormControls()}
+        <div className={classes.buttons}>
+          <Button onClick={loginHandler} disabled={!localState.isFormReady}>
+            Войти
+          </Button>
+          <Button onClick={registerHandler} disabled={!localState.isFormReady}>
+            Зарегистрироваться
+          </Button>
+        </div>
+      </form>
     </div>
   );
 };

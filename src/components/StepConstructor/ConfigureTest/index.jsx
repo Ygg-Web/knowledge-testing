@@ -10,6 +10,8 @@ import {
   resetTest,
 } from "../../../redux/actions/maker";
 
+import classes from "./ConfigureTest.module.scss";
+
 const creatOptionControl = (number) => {
   return createControl(
     {
@@ -117,7 +119,7 @@ export const ConfigureTest = () => {
   };
 
   return (
-    <form className="constructor__form" onSubmit={onSubmitHandler}>
+    <form className={classes.configuration} onSubmit={onSubmitHandler}>
       {renderFormControls()}
 
       <Select
@@ -131,12 +133,14 @@ export const ConfigureTest = () => {
           { text: 4, value: 4 },
         ]}
       />
-      <Button onClick={addClickQuestion} disabled={!localState.isFormReady}>
-        Добавить вопрос
-      </Button>
-      <Button onClick={createClcikQuestion} disabled={test.unit.length === 0}>
-        Создать тест
-      </Button>
+      <div className={classes.buttons}>
+        <Button onClick={addClickQuestion} disabled={!localState.isFormReady}>
+          Добавить вопрос
+        </Button>
+        <Button onClick={createClcikQuestion} disabled={test.unit.length === 0}>
+          Создать тест
+        </Button>
+      </div>
     </form>
   );
 };

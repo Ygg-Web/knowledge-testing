@@ -1,6 +1,7 @@
 import { DescriptionTest } from "../../components/StepConstructor/DescriptionTest";
 import { ConfigureTest } from "../../components/StepConstructor/ConfigureTest";
 import { useSelector } from "react-redux";
+import classes from "./Constructor.module.scss";
 
 const stepsConfigTest = {
   0: DescriptionTest,
@@ -12,11 +13,9 @@ export const Constructor = () => {
   const Step = stepsConfigTest[step];
 
   return (
-    <div className="constructor">
-      <div className="constructor__inner">
-        <h1>Создайте свой тест</h1>
-        <Step />
-      </div>
+    <div className={classes.wrapper}>
+      <h1>Создайте свой тест</h1>
+      <Step />
     </div>
   );
 };

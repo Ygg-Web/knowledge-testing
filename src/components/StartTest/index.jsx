@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { TestEnd } from "../TestItem/TestEnd";
 import { Loader } from "../UI/Loader";
-import { ActiveTestItem } from "../TestItem/ActiveTestItem";
+import { CurrentQuestion } from "../TestItem/CurrentQuestion";
 import { goTestAgain } from "../../redux/actions/test";
+import classes from "./StartTest.module.scss";
 
 export const StartTest = ({ state, onClickAnswerId, onAgain }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const StartTest = ({ state, onClickAnswerId, onAgain }) => {
     };
   }, []);
   return (
-    <div className="question">
+    <div className={classes.question}>
       {state.loading || !state.test.unit.length ? (
         <Loader />
       ) : state.isFinished ? (
@@ -23,7 +24,7 @@ export const StartTest = ({ state, onClickAnswerId, onAgain }) => {
           onAgain={onAgain}
         />
       ) : (
-        <ActiveTestItem
+        <CurrentQuestion
           question={state.test.unit[state.activeQuestion].question}
           answers={state.test.unit[state.activeQuestion].answers}
           onClick={onClickAnswerId}

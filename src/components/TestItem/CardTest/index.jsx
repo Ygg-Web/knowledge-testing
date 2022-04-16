@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import classes from "./CardTest.module.scss";
 
 export const CardTest = ({ test }) => {
   return (
-    <div className="card">
+    <div className={classes.card}>
       <Link to={`/test/${test.id}`}>
         <img src={test.image} alt="drawing" />
       </Link>
-      <div className="card__body">
+      <div className={classes.body}>
         <Link to={`/test/${test.id}`}>
           <h2>{test.name}</h2>
         </Link>

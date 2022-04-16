@@ -1,9 +1,8 @@
 import classes from "./input.module.scss";
 
-export const Input = ({ control, onChange }) => {
+export const Input = ({ control, onChange, typeStyle }) => {
   const nameFor = `${control.type} + ${Math.random()}`;
-  const cls = [classes.input];
-
+  const cls = [classes.input, classes[typeStyle]];
   isInvalid(control) && cls.push(classes.invalid);
 
   return (
@@ -14,6 +13,7 @@ export const Input = ({ control, onChange }) => {
         id={nameFor}
         value={control.value}
         onChange={onChange}
+        placeholder={control.placeholder || ""}
       />
       {isInvalid(control) ? (
         <span>{control.errorMessage || "Введите верное значение"}</span>

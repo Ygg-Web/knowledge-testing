@@ -1,0 +1,17 @@
+.emptiness{
+  width: 700px;
+  margin: 50px auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  &__body{
+    text-align: center;
+    h1{
+      margin-bottom: 20px;
+    }
+  }
+  button{
+    max-width: 200px;
+  }
+}

@@ -1,55 +1,60 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/auth";
+import { Button } from "../../components/UI/Button";
+import classes from "./Header.module.scss";
+import { Container } from "../../hoc/Container";
 
 export const Header = () => {
   const isAuth = useSelector(({ auth }) => !!auth.token);
   const dispatch = useDispatch();
 
+  const navLinks = [
+    { name: "Главная", path: "/", default: "active" },
+    { name: "Конструктор", path: "/constructor" },
+    // { name: "Подборки", path: "/" },
+    // { name: "Материалы", path: "/" },
+  ];
+
   return (
     <header>
-      <div className="container">
-        <div className="header__inner">
+      <Container>
+        <div className={classes.wrapper}>
           <Link to="/">
-            <div className="header__logo">
-              <img src="/assets/logo.png" alt="logo" />
+            <div className={classes.logo}>
+              <img src="/assets/home.png" alt="logo" />
               <h1>Knowledge-check</h1>
             </div>
           </Link>
-          <nav className="header__menu">
-            <ul className="menu">
-              <li className="active">
-                <Link to="/"> Главная</Link>
-              </li>
-              <li>
-                <Link to="/constructor">Конструктор</Link>
-              </li>
-              <li>
-                <Link to="/">Подборки</Link>
-              </li>
-              <li>
-                <Link to="/">Материалы</Link>
-              </li>
+          <nav className={classes.menu}>
+            <ul className={classes.nav}>
+              {navLinks.map((link, index) => (
+                <li key={index}>
+                  <NavLink to={link.path}>{link.name}</NavLink>
+                </li>
+              ))}
             </ul>
           </nav>
-          {isAuth ? (
-            <Link to="/">
-              <div className="header__login" onClick={() => dispatch(logout())}>
-                <img src="/assets/logout.png" alt="logout" />
-                Выход
-              </div>
-            </Link>
-          ) : (
-            <Link to="/auth">
-              <div className="header__login">
-                <img src="/assets/login1.png" alt="login" />
-                Вход
-              </div>
-            </Link>
-          )}
+          <div className={classes.buttons}>
+            {isAuth ? (
+              <Link to="/">
+                <Button onClick={() => dispatch(logout())}>
+                  <img src="/assets/logout.png" alt="logout" />
+                  Выход
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/auth">
+                <Button>
+                  <img src="/assets/login1.png" alt="login" />
+                  Вход
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
+      </Container>
     </header>
   );
 };

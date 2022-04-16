@@ -1,0 +1,19 @@
+.authorization{
+  margin: 70px auto;
+  width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  background:#221A37;
+    h1{
+      text-align: center;
+      margin: 0 0 50px;
+    }
+    .buttons{
+      button{
+        margin: 0 0 20px 0;
+        &:last-child{
+          margin: 0;
+        }
+      }
+    }
+}
