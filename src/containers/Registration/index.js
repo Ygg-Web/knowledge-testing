@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Button } from "../UI/Button";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Button, Input, renderInputControlsForForm } from "../../components/UI";
 import classes from "./Registration.module.scss";
 import {
   createControl,
   updateChangedValue,
   validateForm,
 } from "../../formHelpers";
-import { Input, renderInputControlsForForm } from "../UI/Input";
-import { useDispatch } from "react-redux";
 import { auth } from "../../redux/actions/auth";
 
 const initialState = {

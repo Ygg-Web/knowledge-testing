@@ -1,10 +1,9 @@
-import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Button } from "../../components/UI";
 import { logout } from "../../redux/actions/auth";
-import { Button } from "../../components/UI/Button";
-import classes from "./Header.module.scss";
 import { Container } from "../../hoc/Container";
+import classes from "./Header.module.scss";
 
 export const Header = () => {
   const isAuth = useSelector(({ auth }) => !!auth.token);

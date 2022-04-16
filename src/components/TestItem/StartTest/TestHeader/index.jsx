@@ -1,6 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { Container } from "../../../hoc/Container";
+import { Container } from "../../../../hoc/Container";
 import classes from "./TestHeader.module.scss";
 
 export const TestHeader = () => {

@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTests } from "../../redux/actions/test";
-import { Loader } from "../../components/UI/Loader";
+import { Loader } from "../../components/UI";
 import { CardTest } from "../../components/TestItem/CardTest";
 import { EmptyList } from "../../components/EmptyList";
 

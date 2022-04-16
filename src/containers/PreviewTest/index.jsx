@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Button } from "../../components/UI/Button";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Button, Modal, Loader } from "../../components/UI";
 import {
   clickAnswerInTest,
   fetchAllTestById,
   goTestAgain,
 } from "../../redux/actions/test";
-import { StartTest } from "../../components/StartTest";
-import { Modal } from "../../components/UI/Modal";
-import { Loader } from "../../components/UI/Loader";
+import { StartTest } from "../../components/TestItem/StartTest";
 import classes from "./PreviewTest.module.scss";
 
 export const PreviewTest = () => {

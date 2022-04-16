@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { TestEnd } from "../TestItem/TestEnd";
-import { Loader } from "../UI/Loader";
-import { CurrentQuestion } from "../TestItem/CurrentQuestion";
-import { goTestAgain } from "../../redux/actions/test";
+import { TestEnd } from "../TestEnd";
+import { Loader } from "../../UI";
+import { CurrentQuestion } from "./CurrentQuestion";
+import { goTestAgain } from "../../../redux/actions/test";
 import classes from "./StartTest.module.scss";
 
 export const StartTest = ({ state, onClickAnswerId, onAgain }) => {

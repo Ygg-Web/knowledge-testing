@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { createControl, updateChangedValue } from "../../../formHelpers";
-import { Button } from "../../UI/Button";
-import { Input } from "../../UI/Input";
-import { Textarea } from "../../UI/Textarea";
-import { nextStepConfig } from "../../../redux/actions/maker";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, Input, Textarea } from "../../UI";
+import { createControl, updateChangedValue } from "../../../formHelpers";
+import { nextStepConfig } from "../../../redux/actions/maker";
 import { addDescriptionTest } from "../../../redux/actions/maker";
+
 import classes from "./DescriptionTest.module.scss";
 
 const initialState = {

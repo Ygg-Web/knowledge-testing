@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Container } from "./hoc/Container";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Header } from "./containers/Header";
-
-import { ListTests } from "./containers/ListTests/";
-import { Constructor } from "./containers/Constructor";
-import { Auth } from "./containers/Auth";
+import { Container } from "./hoc/Container";
+import {
+  Header,
+  ListTests,
+  Constructor,
+  Auth,
+  Registration,
+  PreviewTest,
+} from "./containers";
 import { autoLogin } from "./redux/actions/auth";
-import { Registration } from "./components/Registratiion";
-import { PreviewTest } from "./containers/PreviewTest";
 
 function App() {
   const dispatch = useDispatch();

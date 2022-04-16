@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { Button } from "../../UI/Button";
-import { renderInputControlsForForm } from "../../UI/Input";
-import { Select } from "../../UI/Select";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, Select, renderInputControlsForForm } from "../../UI";
 import {
   createControl,
   validateForm,
   updateChangedValue,
 } from "../../../formHelpers";
-import { useSelector, useDispatch } from "react-redux";
 import {
   addQuestionInUnit,
   createUnitWithQuestion,
@@ -15,7 +14,6 @@ import {
 } from "../../../redux/actions/maker";
 
 import classes from "./ConfigureTest.module.scss";
-import { Link } from "react-router-dom";
 
 const creatOptionControl = (number) => {
   return createControl(

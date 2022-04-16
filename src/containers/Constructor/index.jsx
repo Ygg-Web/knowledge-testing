@@ -1,6 +1,6 @@
+import { useSelector } from "react-redux";
 import { DescriptionTest } from "../../components/StepConstructor/DescriptionTest";
 import { ConfigureTest } from "../../components/StepConstructor/ConfigureTest";
-import { useSelector } from "react-redux";
 import classes from "./Constructor.module.scss";
 
 const stepsConfigTest = {
