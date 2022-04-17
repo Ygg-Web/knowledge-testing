@@ -23,7 +23,7 @@ export const Header = () => {
           <Link to="/">
             <div className={classes.logo}>
               <img src="/assets/home.png" alt="logo" />
-              <h1>Knowledge-check</h1>
+              <h1>Game test</h1>
             </div>
           </Link>
           <nav className={classes.menu}>

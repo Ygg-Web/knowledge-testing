@@ -15,6 +15,14 @@ body {
   color: inherit;
 }
 
- .active {
-    color: #662DFC;
+.active {
+  color: #662DFC;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  button{
+    width: 200px;
   }
+}

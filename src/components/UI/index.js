@@ -4,3 +4,4 @@ export { Loader } from "./Loader";
 export { Modal } from "./Modal";
 export { Select } from "./Select";
 export { Textarea } from "./Textarea";
+export { UploadFile } from "./UploadFile";

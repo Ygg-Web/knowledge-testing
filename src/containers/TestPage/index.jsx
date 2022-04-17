@@ -10,7 +10,7 @@ import {
 import { StartTest } from "../../components/TestItem/StartTest";
 import classes from "./PreviewTest.module.scss";
 
-export const PreviewTest = () => {
+export const TestPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const state = useSelector(({ test }) => test);
 

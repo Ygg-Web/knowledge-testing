@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Input, renderInputControlsForForm } from "../../components/UI";
+import {
+  Button,
+  renderInputControlsForForm,
+  UploadFile,
+} from "../../components/UI";
 import classes from "./Registration.module.scss";
 import {
   createControl,
-  updateChangedValue,
+  updateSrcFile,
+  updateValue,
   validateForm,
-} from "../../formHelpers";
+  readFile,
+} from "../../helpers";
 import { auth } from "../../redux/actions/auth";
 
 const initialState = {
@@ -48,17 +54,26 @@ const initialState = {
       { required: true, minLength: 6 }
     ),
   },
+  avatarControl: {
+    label: "Загрузить аватар!",
+    errorMessage: "Загрузите изображение в формате jpeg или png",
+    extension: ["image/png", "image/jpeg"],
+    valid: false,
+    touched: false,
+    src: "",
+  },
   isFormReady: false,
 };
 
 export const Registration = () => {
   const [localState, setLocalState] = useState(initialState);
   const dispatch = useDispatch();
+  const imgTeg = useRef(null);
 
   const onSumbmitHandler = (e) => e.preventDefault();
 
   const onChangeHandler = (e, prevState, controlField) => {
-    const nextControls = updateChangedValue(e, prevState, controlField);
+    const nextControls = updateValue(e, prevState, controlField);
 
     setLocalState((prev) => ({
       ...prev,
@@ -67,14 +82,13 @@ export const Registration = () => {
     }));
   };
 
-  const imageChangeHandler = (e) => {
+  const imageChangeHandler = async (e) => {
     const image = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
+    const result = await readFile(image);
+    const updateAvatar = updateSrcFile(localState.avatarControl, image, result);
 
-    reader.onload = (e) => {
-      setLocalState((prev) => ({ ...prev, imageControl: reader.result }));
-    };
+    imgTeg.current.src = updateAvatar.src;
+    setLocalState((prev) => ({ ...prev, avatarControl: updateAvatar }));
   };
 
   const registerHandler = () => {
@@ -87,27 +101,28 @@ export const Registration = () => {
     );
   };
 
-  const img = {
-    type: "file",
-    label: "Загрузить аватар",
-  };
-
   return (
     <div className={classes.registration}>
       <h1>Форма регистрации</h1>
       <form onSubmit={onSumbmitHandler}>
-        {renderInputControlsForForm(
-          localState.formControls,
-          onChangeHandler,
-          "small"
-        )}
-        <Input
-          control={img}
+        <UploadFile
+          control={localState.avatarControl}
+          image={imgTeg}
           onChange={imageChangeHandler}
-          typeStyle={"image"}
+          typeStyle={"small"}
         />
+        <div className={classes.controls}>
+          {renderInputControlsForForm(
+            localState.formControls,
+            onChangeHandler,
+            "small"
+          )}
+        </div>
       </form>
-      <Button onClick={registerHandler} disabled={!localState.isFormReady}>
+      <Button
+        onClick={registerHandler}
+        disabled={!localState.isFormReady && !localState.avatarControl.valid}
+      >
         Зарегистрироваться
       </Button>
     </div>

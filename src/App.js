@@ -4,11 +4,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Container } from "./hoc/Container";
 import {
   Header,
-  ListTests,
+  Home,
   Constructor,
   Auth,
   Registration,
-  PreviewTest,
+  TestPage,
 } from "./containers";
 import { autoLogin } from "./redux/actions/auth";
 
@@ -24,10 +24,10 @@ function App() {
       <Header />
       <Container>
         <Routes>
-          <Route path="/" element={<ListTests />} />
+          <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/test/:id" element={<PreviewTest />} />
+          <Route path="/test/:id" element={<TestPage />} />
           <Route path="/constructor" element={<Constructor />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

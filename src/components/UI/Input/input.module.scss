@@ -57,25 +57,6 @@
   }
 }
 
-.image{
-  margin: 40px 0;
-  text-align: center;
-  label{
-    margin: 0;
-    padding: 12px;
-    border: 1px solid #662DFC;
-    border-radius: 20px;
-    transition: 0.3s;
-    cursor: pointer;
-    &:hover{
-      background:#662DFC;
-    }
-  }
-  input{
-    display: none;
-  }
-}
-
 .registration, .small{
   input{
     border: 2px solid #B396FD;

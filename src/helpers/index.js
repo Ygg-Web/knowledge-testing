@@ -16,7 +16,7 @@ export const validate = (value, validation = null) => {
   let isValid = true;
 
   if (validation.required) {
-    isValid = value.trim() !== "" && isValid;
+    isValid = value.trim() !== "";
   }
 
   if (validation.minLength) {
@@ -48,21 +48,46 @@ function validateEmail(email) {
     );
 }
 
-export const updateChangedValue = (e, prevState, controlField = null) => {
+export const updateValue = (e, prevState, controlField = null) => {
   const updateState = { ...prevState };
+
   //если несколько полей для контроля
   if (controlField) {
     const control = { ...updateState[controlField] };
     control.value = e.target.value;
     control.touched = true;
-    control.valid = validate(updateState.value, updateState.validation);
+    control.valid = validate(control.value, control.validation);
     updateState[controlField] = control;
+
     return updateState;
     // для одного поля
   } else {
     updateState.value = e.target.value;
     updateState.touched = true;
     updateState.valid = validate(updateState.value, updateState.validation);
+
     return updateState;
   }
+};
+
+export const readFile = async (file) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+
+  const result = await new Promise((resolve, reject) => {
+    reader.onload = (e) => {
+      resolve(reader.result);
+    };
+  });
+
+  return result;
+};
+
+export const updateSrcFile = (prevState, file, src) => {
+  const updateState = { ...prevState };
+  updateState.touched = true;
+  updateState.valid = updateState.extension.includes(file.type);
+  updateState.valid && (updateState.src = src);
+
+  return updateState;
 };

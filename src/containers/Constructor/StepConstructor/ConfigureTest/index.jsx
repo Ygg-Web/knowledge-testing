@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Select, renderInputControlsForForm } from "../../UI";
 import {
-  createControl,
-  validateForm,
-  updateChangedValue,
-} from "../../../formHelpers";
+  Button,
+  Select,
+  renderInputControlsForForm,
+} from "../../../../components/UI";
+import { createControl, validateForm, updateValue } from "../../../../helpers";
 import {
   addQuestionInUnit,
   createUnitWithQuestion,
   resetTest,
-} from "../../../redux/actions/maker";
-
-import classes from "./ConfigureTest.module.scss";
+} from "../../../../redux/actions/maker";
 
 const creatOptionControl = (number) => {
   return createControl(
@@ -59,8 +57,6 @@ export const ConfigureTest = () => {
     };
   }, []);
 
-  const onSubmitHandler = (e) => e.preventDefault();
-
   const addClickQuestion = () => {
     const { question, option1, option2, option3, option4 } =
       localState.formControls;
@@ -92,7 +88,7 @@ export const ConfigureTest = () => {
   };
 
   const inputChangeHandler = (e, prevState, controlField) => {
-    const nextControls = updateChangedValue(e, prevState, controlField);
+    const nextControls = updateValue(e, prevState, controlField);
 
     setLocalState((prev) => ({
       ...prev,
@@ -102,7 +98,7 @@ export const ConfigureTest = () => {
   };
 
   return (
-    <form className={classes.configuration} onSubmit={onSubmitHandler}>
+    <>
       {renderInputControlsForForm(
         localState.formControls,
         inputChangeHandler,
@@ -120,7 +116,7 @@ export const ConfigureTest = () => {
           { text: 4, value: 4 },
         ]}
       />
-      <div className={classes.buttons}>
+      <div className="buttons">
         <Button onClick={addClickQuestion} disabled={!localState.isFormReady}>
           Добавить вопрос
         </Button>
@@ -133,6 +129,6 @@ export const ConfigureTest = () => {
           </Button>
         </Link>
       </div>
-    </form>
+    </>
   );
 };

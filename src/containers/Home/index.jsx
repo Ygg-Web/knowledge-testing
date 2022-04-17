@@ -7,7 +7,7 @@ import { EmptyList } from "../../components/EmptyList";
 
 import classes from "./ListTest.module.scss";
 
-export const ListTests = () => {
+export const Home = () => {
   const { tests, loading } = useSelector(({ test }) => test);
   const dispatch = useDispatch();
 

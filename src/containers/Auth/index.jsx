@@ -2,11 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, renderInputControlsForForm } from "../../components/UI";
-import {
-  createControl,
-  validateForm,
-  updateChangedValue,
-} from "../../formHelpers";
+import { createControl, validateForm, updateValue } from "../../helpers";
 import { auth } from "../../redux/actions/auth";
 import classes from "./Auth.module.scss";
 
@@ -39,8 +35,7 @@ export const Auth = () => {
   const onSumbmitHandler = (e) => e.preventDefault();
 
   const onChangeHandler = (e, prevState, controlField) => {
-    const nextControls = updateChangedValue(e, prevState, controlField);
-
+    const nextControls = updateValue(e, prevState, controlField);
     setLocalState((prev) => ({
       ...prev,
       formControls: nextControls,
