@@ -1,5 +1,5 @@
-export { Auth } from "./Auth";
-export { Registration } from "./Registration";
+export { Login } from "./Login";
+export { SingUp } from "./SingUp";
 export { Constructor } from "./Constructor";
 export { Home } from "./Home";
 export { TestPage } from "./TestPage";

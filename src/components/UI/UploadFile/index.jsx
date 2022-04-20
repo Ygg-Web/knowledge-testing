@@ -7,7 +7,7 @@ export const UploadFile = ({ control, onChange, image, typeStyle }) => {
   return (
     <div className={cls.join(" ")}>
       <div className={classes.image}>
-        <img ref={image} src="logo512.png" alt="" />
+        <img ref={image} src="" alt="" />
       </div>
       <label htmlFor={nameFor}>{control.label}</label>
       <input type="file" id={nameFor} onChange={onChange} hidden />

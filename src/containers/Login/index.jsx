@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { Button, renderInputControlsForForm } from "../../components/UI";
 import { createControl, validateForm, updateValue } from "../../helpers";
 import { auth } from "../../redux/actions/auth";
 import classes from "./Auth.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   formControls: {
@@ -28,9 +29,14 @@ const initialState = {
   isFormReady: false,
 };
 
-export const Auth = () => {
+export const Login = () => {
   const [localState, setLocalState] = useState(initialState);
+  const { loading } = useSelector(({ auth }) => auth);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const fromPage = location.state?.from || "/";
 
   const onSumbmitHandler = (e) => e.preventDefault();
 
@@ -46,11 +52,13 @@ export const Auth = () => {
   const loginHandler = () => {
     dispatch(
       auth(
+        true,
         localState.formControls.email.value,
-        localState.formControls.password.value,
-        true
+        localState.formControls.password.value
       )
-    );
+    ).then((isSuccess) => {
+      isSuccess && navigate(fromPage, { replace: true });
+    });
   };
 
   return (
@@ -63,10 +71,13 @@ export const Auth = () => {
           "registration"
         )}
         <div className={classes.buttons}>
-          <Button onClick={loginHandler} disabled={!localState.isFormReady}>
+          <Button
+            onClick={loginHandler}
+            disabled={!localState.isFormReady || loading}
+          >
             Войти
           </Button>
-          <Link to="/register">
+          <Link to="/signup">
             <Button>Зарегистрироваться</Button>
           </Link>
         </div>

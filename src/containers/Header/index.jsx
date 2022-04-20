@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../components/UI";
 import { logout } from "../../redux/actions/auth";
@@ -8,6 +8,12 @@ import classes from "./Header.module.scss";
 export const Header = () => {
   const isAuth = useSelector(({ auth }) => !!auth.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    dispatch(logout());
+    navigate("/", { replace: true });
+  };
 
   const navLinks = [
     { name: "Главная", path: "/", default: "active" },
@@ -15,6 +21,8 @@ export const Header = () => {
     // { name: "Подборки", path: "/" },
     // { name: "Материалы", path: "/" },
   ];
+
+  isAuth && navLinks.push({ name: "Личный кабинет", path: "/profile/" });
 
   return (
     <header>
@@ -37,14 +45,12 @@ export const Header = () => {
           </nav>
           <div className={classes.buttons}>
             {isAuth ? (
-              <Link to="/">
-                <Button onClick={() => dispatch(logout())}>
-                  <img src="/assets/logout.png" alt="logout" />
-                  Выход
-                </Button>
-              </Link>
+              <Button onClick={logOut}>
+                <img src="/assets/logout.png" alt="logout" />
+                Выход
+              </Button>
             ) : (
-              <Link to="/auth">
+              <Link to="/login">
                 <Button>
                   <img src="/assets/login1.png" alt="login" />
                   Вход

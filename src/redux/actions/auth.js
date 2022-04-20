@@ -1,60 +1,83 @@
-import axios from "axios";
+import { updateProfile } from "firebase/auth";
+import { Axios } from "../../axios";
+import { login, logoutSession, signup, upload } from "../../firebase";
 
-export const successAuth = (token) => ({
-  type: "SUCCESS_AUTH",
+export const setLoading = (data) => ({
+  type: "SET_LOADING",
+  data,
+});
+
+export const setUser = (token, email, name, avatar) => ({
+  type: "SET_USER",
   token,
+  email,
+  name,
+  avatar,
 });
 
 export const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("userId");
-  localStorage.removeItem("expirationDate");
+  logoutSession();
   return {
     type: "LOGOUT_AUTH",
   };
 };
 
-export const autoLogout = (time) => (dispatch) => {
-  setTimeout(() => {
-    dispatch(logout());
-  }, time * 1000);
-};
-
-export const autoLogin = () => (dispatch) => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    dispatch(logout());
-  } else {
-    const expirationDate = localStorage.getItem("expirationDate");
-    if (expirationDate <= new Date()) {
-      dispatch(logout());
-    } else {
-      dispatch(successAuth(token));
-      dispatch(
-        autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000)
-      );
-    }
+export const addNameUserInBD = (name) => async (dispatch, getState) => {
+  try {
+    await Axios.post("/username.json", getState().auth.displayName);
+  } catch (e) {
+    console.log(e);
   }
 };
 
-export const auth = (email, password, isLogin) => async (dispatch) => {
-  const authData = {
-    email,
-    password,
-    returnSecureToken: true,
+export const auth =
+  (isLogin, email, password, displayName, avatar) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      if (isLogin) {
+        const { user } = await login(email, password);
+
+        dispatch(
+          setUser(user.accessToken, user.email, user.displayName, user.photoURL)
+        );
+
+        alert("Добро пожаловать!");
+        dispatch(setLoading(false));
+        return true;
+      } else {
+        const { user } = await signup(email, password);
+        const avatarUrl = await upload(avatar, user);
+
+        console.log("avatarUrl", avatarUrl);
+        await updateProfile(user, {
+          displayName,
+          photoURL: avatarUrl,
+        });
+
+        dispatch(
+          setUser(user.accessToken, user.email, user.displayName, user.photoURL)
+        );
+
+        alert("Добро пожаловать!");
+        dispatch(setLoading(false));
+        return true;
+      }
+    } catch (e) {
+      console.log(e);
+      switch (e.message) {
+        case "Firebase: Error (auth/user-not-found).":
+          alert("Такого пользователя не существует!");
+          break;
+        case "Firebase: Error (auth/wrong-password).":
+          alert("Не правильно набран пароль. Попробуйте еще раз!");
+          break;
+        case "Firebase: Error (auth/email-already-in-use).":
+          alert("Пользователь с таким Email уже существует!");
+          break;
+        default:
+          alert("Произошла ошибка!");
+      }
+      dispatch(setLoading(false));
+      return false;
+    }
   };
-
-  const url = isLogin
-    ? "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDULKurhxIEGxtxAzwl5CNGthK33_ZIZKU"
-    : "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDULKurhxIEGxtxAzwl5CNGthK33_ZIZKU";
-
-  const { data } = await axios.post(url, authData);
-  const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000);
-
-  localStorage.setItem("token", data.idToken);
-  localStorage.setItem("userId", data.localId);
-  localStorage.setItem("expirationDate", expirationDate);
-
-  dispatch(successAuth(data.idToken));
-  dispatch(autoLogout(data.expiresIn));
-};

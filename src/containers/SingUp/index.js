@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   renderInputControlsForForm,
@@ -14,6 +14,7 @@ import {
   readFile,
 } from "../../helpers";
 import { auth } from "../../redux/actions/auth";
+import { Link, useNavigate } from "react-router-dom";
 
 const initialState = {
   formControls: {
@@ -62,12 +63,15 @@ const initialState = {
     touched: false,
     src: "",
   },
-  isFormReady: false,
+  avatar: "",
+  isInputReady: false,
 };
 
-export const Registration = () => {
+export const SingUp = () => {
   const [localState, setLocalState] = useState(initialState);
+  const loading = useSelector(({ auth }) => auth.login);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const imgTeg = useRef(null);
 
   const onSumbmitHandler = (e) => e.preventDefault();
@@ -78,7 +82,7 @@ export const Registration = () => {
     setLocalState((prev) => ({
       ...prev,
       formControls: nextControls,
-      isFormReady: validateForm(nextControls),
+      isInputReady: validateForm(nextControls),
     }));
   };
 
@@ -88,18 +92,35 @@ export const Registration = () => {
     const updateAvatar = updateSrcFile(localState.avatarControl, image, result);
 
     imgTeg.current.src = updateAvatar.src;
-    setLocalState((prev) => ({ ...prev, avatarControl: updateAvatar }));
+    setLocalState((prev) => ({
+      ...prev,
+      avatarControl: updateAvatar,
+      avatar: image,
+    }));
   };
 
   const registerHandler = () => {
     dispatch(
       auth(
+        false,
         localState.formControls.email.value,
         localState.formControls.password.value,
-        false
+        localState.formControls.login.value,
+        localState.avatar
       )
-    );
+    ).then((isSuccess) => {
+      isSuccess && navigate("/", { replace: true });
+    });
   };
+
+  const isFormReady = (() => {
+    return (
+      localState.isInputReady &&
+      localState.avatarControl.valid &&
+      localState.formControls.password.value ===
+        localState.formControls.repeatPassword.value
+    );
+  })();
 
   return (
     <div className={classes.registration}>
@@ -119,12 +140,14 @@ export const Registration = () => {
           )}
         </div>
       </form>
-      <Button
-        onClick={registerHandler}
-        disabled={!localState.isFormReady && !localState.avatarControl.valid}
-      >
-        Зарегистрироваться
-      </Button>
+      <div className={classes.buttons}>
+        <Link to="/login">
+          <Button>Войти</Button>
+        </Link>
+        <Button onClick={registerHandler} disabled={!isFormReady || loading}>
+          Зарегистрироваться
+        </Button>
+      </div>
     </div>
   );
 };

@@ -27,7 +27,7 @@ const initialState = {
     { required: true, minLength: 10 }
   ),
   cover: {
-    label: "Загрузить аватар!",
+    label: "Загрузить обложку!",
     errorMessage: "Загрузите изображение в формате jpeg или png",
     extension: ["image/png", "image/jpeg"],
     valid: false,
@@ -39,7 +39,6 @@ const initialState = {
 export const DescriptionTest = () => {
   const [localState, setLocalState] = useState(initialState);
   const dispatch = useDispatch();
-
   const imgTeg = useRef(null);
 
   const inputChangeHandler = (e, prevState) => {
@@ -87,7 +86,7 @@ export const DescriptionTest = () => {
     return (
       localState.inputControl.valid &&
       localState.textareaControl.valid &&
-      localState.cover
+      localState.cover.valid
     );
   })();
 

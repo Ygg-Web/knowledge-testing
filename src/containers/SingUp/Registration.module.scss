@@ -5,9 +5,9 @@
   padding: 40px;
   background :#221A37;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items:center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items:center;
    h1{
     text-align: center;
     font-weight: 500;
@@ -27,5 +27,13 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+  .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    button{
+      width: 240px;
+    }
   }
 }

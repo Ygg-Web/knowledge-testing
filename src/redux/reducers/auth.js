@@ -1,13 +1,25 @@
 const initialState = {
   token: null,
+  email: "",
+  displayName: "",
+  avatar: "",
+  loading: false,
 };
 
 export const auth = (state = initialState, action) => {
   switch (action.type) {
-    case "SUCCESS_AUTH":
-      return { ...state, token: action.token };
+    case "SET_LOADING":
+      return { ...state, loading: action.data };
+    case "SET_USER":
+      return {
+        ...state,
+        token: action.token,
+        email: action.email,
+        displayName: action.name,
+        avatar: action.avatar,
+      };
     case "LOGOUT_AUTH":
-      return { ...state, token: null };
+      return initialState;
     default:
       return state;
   }
