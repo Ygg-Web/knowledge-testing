@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input, Textarea, UploadFile } from "../../../../components/UI";
 import {
@@ -38,6 +38,7 @@ const initialState = {
 
 export const DescriptionTest = () => {
   const [localState, setLocalState] = useState(initialState);
+  const { displayName, email, avatar } = useSelector(({ auth }) => auth);
   const dispatch = useDispatch();
   const imgTeg = useRef(null);
 
@@ -75,6 +76,9 @@ export const DescriptionTest = () => {
       name: localState.inputControl.value,
       description: localState.textareaControl.value,
       image: localState.imageControl,
+      authorName: displayName,
+      authorEmail: email,
+      authorAvatar: avatar,
     };
 
     dispatch(addDescriptionTest(descriptionTest));

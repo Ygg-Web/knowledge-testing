@@ -43,6 +43,9 @@ export const fetchTests = () => async (dispatch) => {
         name: value.name,
         description: value.description,
         image: value.image,
+        authorName: value.authorName,
+        authorEmail: value.authorEmail,
+        authorAvatar: value.authorAvatar,
       });
     });
 

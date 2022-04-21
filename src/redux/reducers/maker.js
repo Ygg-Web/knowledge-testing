@@ -4,6 +4,9 @@ const initialState = {
     name: "",
     description: "",
     image: "",
+    authorName: "",
+    authorEmail: "",
+    authorAvatar: "",
     unit: [],
   },
 };

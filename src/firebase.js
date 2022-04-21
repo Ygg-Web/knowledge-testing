@@ -30,18 +30,18 @@ export const signup = (email, password) =>
 export const login = (email, password) =>
   signInWithEmailAndPassword(auth, email, password);
 
-export const useAuth = () => {
-  const [currentUser, setCurrentUser] = useState();
+// export const useAuth = () => {
+//   const [currentUser, setCurrentUser] = useState();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) =>
-      setCurrentUser(user)
-    );
-    return unsubscribe;
-  }, []);
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (user) =>
+//       setCurrentUser(user)
+//     );
+//     return unsubscribe;
+//   }, []);
 
-  return currentUser;
-};
+//   return currentUser;
+// };
 
 export const logoutSession = () => signOut(auth);
 
