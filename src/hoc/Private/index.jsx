@@ -8,6 +8,6 @@ export const Private = ({ children }) => {
   return isAuth ? (
     children
   ) : (
-    <Navigate to="/auth" state={{ from: location.pathname }} />
+    <Navigate to="/login" state={{ from: location.pathname }} />
   );
 };

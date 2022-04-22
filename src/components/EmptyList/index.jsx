@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { Button } from "../UI";
 import classes from "./EmptyList.module.scss";
 
-export const EmptyList = () => {
+export const EmptyList = ({ label }) => {
   return (
     <div className={classes.emptiness}>
       <div className={classes.body}>
-        <h1>Добро пожаловать!</h1>
+        <h1>{label}</h1>
         <p>
           Текущий список тестов пуст. Для создания своего неповторимого теста,
           необходимо перейти в Конструктор

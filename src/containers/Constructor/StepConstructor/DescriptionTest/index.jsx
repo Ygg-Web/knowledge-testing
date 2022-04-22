@@ -65,6 +65,7 @@ export const DescriptionTest = () => {
     const result = await readFile(image);
     const updateCover = updateSrcFile(localState.cover, image, result);
 
+    console.log(updateCover);
     imgTeg.current.src = updateCover.src;
     setLocalState((prev) => ({ ...prev, cover: updateCover }));
   };
@@ -75,10 +76,10 @@ export const DescriptionTest = () => {
     const descriptionTest = {
       name: localState.inputControl.value,
       description: localState.textareaControl.value,
-      image: localState.imageControl,
-      authorName: displayName,
-      authorEmail: email,
-      authorAvatar: avatar,
+      image: localState.cover.src,
+      nameAuthor: displayName,
+      emailAuthor: email,
+      avatarAuthor: avatar,
     };
 
     dispatch(addDescriptionTest(descriptionTest));

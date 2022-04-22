@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  deleteUser,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -44,6 +45,7 @@ export const login = (email, password) =>
 // };
 
 export const logoutSession = () => signOut(auth);
+export const deleteProfile = () => deleteUser(auth.currentUser);
 
 // export const uploadImage(file, currentUser, setLoading) {
 //   const fileRef =

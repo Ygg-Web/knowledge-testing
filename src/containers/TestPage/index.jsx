@@ -48,7 +48,6 @@ export const TestPage = () => {
               <Button onClick={() => setModalActive(true)}>Поехали!</Button>
             </div>
           </div>
-
           <Modal active={modalActive} setModalActive={setModalActive}>
             <StartTest
               state={state}

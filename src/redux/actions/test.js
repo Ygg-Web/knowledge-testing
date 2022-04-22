@@ -30,6 +30,20 @@ export const nextQuestionTest = (number) => ({
   number,
 });
 
+export const removeTest = (id) => async (dispatch, getState) => {
+  dispatch(setLoaded(true));
+  const { tests } = getState().test;
+
+  try {
+    await Axios.delete(`/tests/${id}.json`);
+    const filtredTests = tests.filter((test) => test.id !== id);
+    dispatch(setTests(filtredTests));
+  } catch (e) {
+    console.log(e);
+  }
+  dispatch(setLoaded(false));
+};
+
 export const fetchTests = () => async (dispatch) => {
   dispatch(setLoaded(true));
 
@@ -43,9 +57,9 @@ export const fetchTests = () => async (dispatch) => {
         name: value.name,
         description: value.description,
         image: value.image,
-        authorName: value.authorName,
-        authorEmail: value.authorEmail,
-        authorAvatar: value.authorAvatar,
+        nameAuthor: value.nameAuthor,
+        emailAuthor: value.emailAuthor,
+        avatarAuthor: value.avatarAuthor,
       });
     });
 

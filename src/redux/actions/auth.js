@@ -1,6 +1,12 @@
 import { updateProfile } from "firebase/auth";
 import { Axios } from "../../axios";
-import { login, logoutSession, signup, upload } from "../../firebase";
+import {
+  deleteProfile,
+  login,
+  logoutSession,
+  signup,
+  upload,
+} from "../../firebase";
 
 export const setLoading = (data) => ({
   type: "SET_LOADING",
@@ -22,6 +28,13 @@ export const logout = () => {
   };
 };
 
+export const deleteUser = () => {
+  deleteProfile();
+  return {
+    type: "DELETE_USER",
+  };
+};
+
 export const addNameUserInBD = (name) => async (dispatch, getState) => {
   try {
     await Axios.post("/username.json", getState().auth.displayName);
@@ -40,15 +53,10 @@ export const auth =
         dispatch(
           setUser(user.accessToken, user.email, user.displayName, user.photoURL)
         );
-
-        alert("Добро пожаловать!");
-        dispatch(setLoading(false));
-        return true;
       } else {
         const { user } = await signup(email, password);
         const avatarUrl = await upload(avatar, user);
 
-        console.log("avatarUrl", avatarUrl);
         await updateProfile(user, {
           displayName,
           photoURL: avatarUrl,
@@ -57,11 +65,10 @@ export const auth =
         dispatch(
           setUser(user.accessToken, user.email, user.displayName, user.photoURL)
         );
-
-        alert("Добро пожаловать!");
-        dispatch(setLoading(false));
-        return true;
       }
+      alert("Добро пожаловать!");
+      dispatch(setLoading(false));
+      return true;
     } catch (e) {
       console.log(e);
       switch (e.message) {

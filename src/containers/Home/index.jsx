@@ -10,8 +10,8 @@ import { Search } from "../../components/UI/Search";
 
 export const Home = () => {
   const { tests, loading } = useSelector(({ test }) => test);
-  const dispatch = useDispatch();
   const [searchString, setSearchString] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTests());
@@ -41,7 +41,7 @@ export const Home = () => {
       {loading ? (
         <Loader />
       ) : !tests.length ? (
-        <EmptyList />
+        <EmptyList label="Добро пожаловать!" />
       ) : (
         <div className={classes.list}>
           {filtredTests.map((test, index) => (

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { Button } from "../../UI";
 import classes from "./CardTest.module.scss";
 
-export const CardTest = ({ test }) => {
+export const CardTest = ({ test, user, onClick }) => {
   return (
     <div className={classes.card}>
       <Link to={`/test/${test.id}`}>
@@ -14,20 +15,15 @@ export const CardTest = ({ test }) => {
           <h2>{test.name}</h2>
         </Link>
         <p>{test.description}</p>
+        <div className={classes.profile}>
+          <h4>{test.nameAuthor}</h4>
+          <img src={test.avatarAuthor} alt="avatar" />
+        </div>
       </div>
-      <div className="card__bottom">
-        {/* <div className="item__rating">
-            <i>{test.rating}</i>
-          </div>
-          <div className="item__limit">
-            <i>{test.viewed}</i>
-          </div>
-          <Link to="/">
-            <div className="item__profile">
-              <i>{test.author.username}</i>
-              <img src={test.author.avatar} alt="avatar" />
-            </div>
-          </Link> */}
+      <div className={classes.bottom}>
+        {user === test.emailAuthor && (
+          <Button onClick={() => onClick(test.id)}>Удалить</Button>
+        )}
       </div>
     </div>
   );

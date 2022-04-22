@@ -20,6 +20,8 @@ export const auth = (state = initialState, action) => {
       };
     case "LOGOUT_AUTH":
       return initialState;
+    case "DELETE_USER":
+      return initialState;
     default:
       return state;
   }

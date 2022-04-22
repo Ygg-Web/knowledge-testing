@@ -18,8 +18,6 @@ export const Header = () => {
   const navLinks = [
     { name: "Главная", path: "/", default: "active" },
     { name: "Конструктор", path: "/constructor" },
-    // { name: "Подборки", path: "/" },
-    // { name: "Материалы", path: "/" },
   ];
 
   isAuth && navLinks.push({ name: "Личный кабинет", path: "/profile/" });
