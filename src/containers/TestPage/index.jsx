@@ -8,7 +8,8 @@ import {
   goTestAgain,
 } from "../../redux/actions/test";
 import { StartTest } from "../../components/TestItem/StartTest";
-import classes from "./PreviewTest.module.scss";
+
+import classes from "./TestPage.module.scss";
 
 export const TestPage = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -29,6 +30,15 @@ export const TestPage = () => {
     dispatch(goTestAgain());
   }, []);
 
+  const onClickHiddenModal = useCallback(() => {
+    setModalActive(false);
+    onAgain();
+  }, []);
+
+  const onClickShowModal = useCallback(() => {
+    setModalActive(true);
+  }, []);
+
   return (
     <>
       {state.loading || !state.test ? (
@@ -45,10 +55,10 @@ export const TestPage = () => {
             </div>
             <div className={classes.bottom}>
               <p>количество вопросов - {state.test.unit.length}</p>
-              <Button onClick={() => setModalActive(true)}>Поехали!</Button>
+              <Button onClick={onClickShowModal}>Поехали!</Button>
             </div>
           </div>
-          <Modal active={modalActive} setModalActive={setModalActive}>
+          <Modal active={modalActive} onClickHiddenModal={onClickHiddenModal}>
             <StartTest
               state={state}
               onClickAnswerId={onClickAnswerId}

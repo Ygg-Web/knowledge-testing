@@ -4,10 +4,6 @@ export const nextStepConfig = () => ({
   type: "NEXT_STEP_CONFIG",
 });
 
-// export const firstStepConfig = () => ({
-//   type: "FIRST_STEP_CONFIG",
-// });
-
 export const addDescriptionTest = (description) => ({
   type: "ADD_DESCRIPTION_TEST",
   description,

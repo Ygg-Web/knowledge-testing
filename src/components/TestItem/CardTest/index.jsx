@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../UI";
 import classes from "./CardTest.module.scss";
 
-export const CardTest = ({ test, user, onClick }) => {
+export const CardTest = memo(({ test, user, onClick }) => {
   return (
     <div className={classes.card}>
       <Link to={`/test/${test.id}`}>
@@ -27,4 +28,4 @@ export const CardTest = ({ test, user, onClick }) => {
       </div>
     </div>
   );
-};
+});

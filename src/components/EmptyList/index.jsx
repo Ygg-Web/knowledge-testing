@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../UI";
 import classes from "./EmptyList.module.scss";
 
-export const EmptyList = ({ label }) => {
+export const EmptyList = memo(({ label }) => {
   return (
     <div className={classes.emptiness}>
       <div className={classes.body}>
@@ -17,4 +18,4 @@ export const EmptyList = ({ label }) => {
       </Link>
     </div>
   );
-};
+});

@@ -1,6 +1,7 @@
+import { memo } from "react";
 import classes from "./Search.module.scss";
 
-export const Search = ({ value, onChange, onClick }) => {
+export const Search = memo(({ value, onChange, onClick }) => {
   return (
     <div className={classes.search}>
       <input
@@ -12,4 +13,4 @@ export const Search = ({ value, onChange, onClick }) => {
       {value ? <p onClick={onClick}>&#10060;</p> : <b> &#128269;</b>}
     </div>
   );
-};
+});

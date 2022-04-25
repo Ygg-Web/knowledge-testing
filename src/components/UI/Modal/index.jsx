@@ -1,10 +1,10 @@
 import classes from "./Modal.module.scss";
 
-export const Modal = ({ active, setModalActive, children }) => {
+export const Modal = ({ active, onClickHiddenModal, children }) => {
   return (
     <div
       className={active ? `${classes.modal} ${classes.active}` : classes.modal}
-      onClick={() => setModalActive(false)}
+      onClick={onClickHiddenModal}
     >
       <div
         className={

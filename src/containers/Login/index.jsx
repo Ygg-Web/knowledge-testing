@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Button, renderInputControlsForForm } from "../../components/UI";
 import { createControl, validateForm, updateValue } from "../../helpers";
 import { auth } from "../../redux/actions/auth";
-import classes from "./Auth.module.scss";
-import { useNavigate } from "react-router-dom";
+
+import classes from "./Login.module.scss";
 
 const initialState = {
   formControls: {
@@ -29,16 +30,17 @@ const initialState = {
   isFormReady: false,
 };
 
-export const Login = () => {
+export const Login = memo(() => {
   const [localState, setLocalState] = useState(initialState);
   const { loading } = useSelector(({ auth }) => auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const location = useLocation();
   const fromPage = location.state?.from || "/";
 
-  const onSumbmitHandler = (e) => e.preventDefault();
+  const onSumbmitHandler = useCallback((e) => e.preventDefault(), []);
 
   const onChangeHandler = (e, prevState, controlField) => {
     const nextControls = updateValue(e, prevState, controlField);
@@ -49,17 +51,17 @@ export const Login = () => {
     }));
   };
 
-  const loginHandler = () => {
-    dispatch(
+  const loginHandler = useCallback(async () => {
+    const isSuccess = await dispatch(
       auth(
         true,
         localState.formControls.email.value,
         localState.formControls.password.value
       )
-    ).then((isSuccess) => {
-      isSuccess && navigate(fromPage, { replace: true });
-    });
-  };
+    );
+
+    isSuccess && navigate(fromPage, { replace: true });
+  }, [localState.formControls]);
 
   return (
     <div className={classes.authorization}>
@@ -84,4 +86,4 @@ export const Login = () => {
       </form>
     </div>
   );
-};
+});

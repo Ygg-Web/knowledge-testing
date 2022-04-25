@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { EmptyList } from "../../components/EmptyList";
 import { CardTest } from "../../components/TestItem/CardTest";
-import { Button, Loader } from "../../components/UI";
-import { Search } from "../../components/UI/Search";
+import { Button, Loader, Search } from "../../components/UI";
 import { deleteUser, logout } from "../../redux/actions/auth";
 import { fetchTests, removeTest } from "../../redux/actions/test";
+
 import classes from "./Profile.module.scss";
 
 export const Profile = () => {
@@ -16,32 +16,41 @@ export const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userTests = tests.filter((test) => test.emailAuthor === email);
+  const userTests = useMemo(
+    () => tests.filter((test) => test.emailAuthor === email),
+    [tests, email]
+  );
 
-  const filtredTests = userTests.filter((test) => {
-    return (
-      test.name.toLowerCase().includes(searchString) ||
-      test.description.toLowerCase().includes(searchString)
-    );
-  });
+  const filtredTests = useMemo(
+    () =>
+      userTests.filter((test) => {
+        return (
+          test.name.toLowerCase().includes(searchString) ||
+          test.description.toLowerCase().includes(searchString)
+        );
+      }),
+    [userTests, searchString]
+  );
 
   useEffect(() => {
     dispatch(fetchTests());
   }, []);
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     dispatch(logout());
     navigate("/", { replace: true });
-  };
+  }, []);
 
-  const deleteProfile = () => dispatch(deleteUser());
+  const onClickDeleteTest = useCallback((id) => dispatch(removeTest(id)), []);
 
-  const clearSearchString = () => setSearchString("");
+  const deleteProfile = useCallback(() => dispatch(deleteUser()), []);
 
-  const searchChangeHandler = (e) =>
-    setSearchString(e.target.value.toLowerCase());
+  const clearSearchString = useCallback(() => setSearchString(""), []);
 
-  const onClickDeleteTest = (id) => dispatch(removeTest(id));
+  const searchChangeHandler = useCallback(
+    (e) => setSearchString(e.target.value.toLowerCase()),
+    []
+  );
 
   return (
     <div className={classes.person}>

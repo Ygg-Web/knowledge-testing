@@ -15,8 +15,6 @@ export const maker = (state = initialState, action) => {
   switch (action.type) {
     case "NEXT_STEP_CONFIG":
       return { ...state, step: ++state.step };
-    // case "FIRST_STEP_CONFIG":
-    //   return { ...state, step: 0 };
     case "RESET_TEST":
       return {
         ...state,

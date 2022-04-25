@@ -1,6 +1,7 @@
+import { memo } from "react";
 import classes from "./Upload.module.scss";
 
-export const UploadFile = ({ control, onChange, image, typeStyle }) => {
+export const UploadFile = memo(({ control, onChange, image, typeStyle }) => {
   const nameFor = `${control.type} + ${Math.random()}`;
   const cls = [classes.wrapper, classes[typeStyle]];
 
@@ -16,4 +17,4 @@ export const UploadFile = ({ control, onChange, image, typeStyle }) => {
       ) : null}
     </div>
   );
-};
+});

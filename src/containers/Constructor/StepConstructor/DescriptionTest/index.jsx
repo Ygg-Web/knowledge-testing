@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Input, Textarea, UploadFile } from "../../../../components/UI";
@@ -60,17 +60,16 @@ export const DescriptionTest = () => {
     }));
   };
 
-  const imageChangeHandler = async (e) => {
+  const imageChangeHandler = useCallback(async (e) => {
     const image = e.target.files[0];
     const result = await readFile(image);
     const updateCover = updateSrcFile(localState.cover, image, result);
-
-    console.log(updateCover);
     imgTeg.current.src = updateCover.src;
-    setLocalState((prev) => ({ ...prev, cover: updateCover }));
-  };
 
-  const onClickBack = () => setLocalState(initialState);
+    setLocalState((prev) => ({ ...prev, cover: updateCover }));
+  }, []);
+
+  const onClickBack = useCallback(() => setLocalState(initialState), []);
 
   const onClickNextStep = () => {
     const descriptionTest = {

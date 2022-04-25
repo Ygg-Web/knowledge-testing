@@ -1,18 +1,17 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { TestEnd } from "../TestEnd";
 import { Loader } from "../../UI";
 import { CurrentQuestion } from "./CurrentQuestion";
-import { goTestAgain } from "../../../redux/actions/test";
+
 import classes from "./StartTest.module.scss";
 
 export const StartTest = ({ state, onClickAnswerId, onAgain }) => {
-  const dispatch = useDispatch();
   useEffect(() => {
     return () => {
-      dispatch(goTestAgain());
+      onAgain();
     };
   }, []);
+
   return (
     <div className={classes.question}>
       {state.loading || !state.test.unit.length ? (

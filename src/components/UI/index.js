@@ -5,3 +5,4 @@ export { Modal } from "./Modal";
 export { Select } from "./Select";
 export { Textarea } from "./Textarea";
 export { UploadFile } from "./UploadFile";
+export { Search } from "./Search";

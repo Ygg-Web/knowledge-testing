@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -48,7 +48,7 @@ const initialState = {
 
 export const ConfigureTest = () => {
   const [localState, setLocalState] = useState(initialState);
-  const test = useSelector(({ maker }) => maker.test);
+  const { test } = useSelector(({ maker }) => maker);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -77,15 +77,15 @@ export const ConfigureTest = () => {
     setLocalState(initialState);
   };
 
-  const createClcikQuestion = () => {
+  const createClcikQuestion = useCallback(() => {
     dispatch(createUnitWithQuestion());
     alert("Тест успешно создан!");
     setLocalState(initialState);
-  };
+  }, []);
 
-  const selectChangeHandler = (e) => {
+  const selectChangeHandler = useCallback((e) => {
     setLocalState((prev) => ({ ...prev, rightAnswerId: e.target.value }));
-  };
+  }, []);
 
   const inputChangeHandler = (e, prevState, controlField) => {
     const nextControls = updateValue(e, prevState, controlField);
@@ -104,7 +104,6 @@ export const ConfigureTest = () => {
         inputChangeHandler,
         "default"
       )}
-
       <Select
         label="Выберите правильный ответ"
         value={localState.rightAnswerId}

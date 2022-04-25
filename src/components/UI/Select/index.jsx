@@ -1,6 +1,7 @@
+import { memo } from "react";
 import classes from "./Selecet.module.scss";
 
-export const Select = (props) => {
+export const Select = memo((props) => {
   const nameFor = `${props.label} + ${Math.random()} `;
 
   return (
@@ -15,4 +16,4 @@ export const Select = (props) => {
       </select>
     </div>
   );
-};
+});

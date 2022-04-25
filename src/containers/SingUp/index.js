@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
   renderInputControlsForForm,
   UploadFile,
 } from "../../components/UI";
-import classes from "./Registration.module.scss";
 import {
   createControl,
   updateSrcFile,
@@ -14,7 +14,8 @@ import {
   readFile,
 } from "../../helpers";
 import { auth } from "../../redux/actions/auth";
-import { Link, useNavigate } from "react-router-dom";
+
+import classes from "./SingUp.module.scss";
 
 const initialState = {
   formControls: {
@@ -74,7 +75,7 @@ export const SingUp = () => {
   const navigate = useNavigate();
   const imgTeg = useRef(null);
 
-  const onSumbmitHandler = (e) => e.preventDefault();
+  const onSumbmitHandler = useCallback((e) => e.preventDefault(), []);
 
   const onChangeHandler = (e, prevState, controlField) => {
     const nextControls = updateValue(e, prevState, controlField);
@@ -86,21 +87,21 @@ export const SingUp = () => {
     }));
   };
 
-  const imageChangeHandler = async (e) => {
+  const imageChangeHandler = useCallback(async (e) => {
     const image = e.target.files[0];
     const result = await readFile(image);
     const updateAvatar = updateSrcFile(localState.avatarControl, image, result);
-
     imgTeg.current.src = updateAvatar.src;
+
     setLocalState((prev) => ({
       ...prev,
       avatarControl: updateAvatar,
       avatar: image,
     }));
-  };
+  }, []);
 
-  const registerHandler = () => {
-    dispatch(
+  const registerHandler = useCallback(async () => {
+    const isSuccess = await dispatch(
       auth(
         false,
         localState.formControls.email.value,
@@ -108,10 +109,10 @@ export const SingUp = () => {
         localState.formControls.login.value,
         localState.avatar
       )
-    ).then((isSuccess) => {
-      isSuccess && navigate("/", { replace: true });
-    });
-  };
+    );
+
+    isSuccess && navigate("/", { replace: true });
+  }, [localState.formControls, localState.avatar]);
 
   const isFormReady = (() => {
     return (

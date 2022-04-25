@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../../components/UI";
@@ -10,10 +11,10 @@ export const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const logOut = () => {
+  const logOut = useCallback(() => {
     dispatch(logout());
     navigate("/", { replace: true });
-  };
+  }, []);
 
   const navLinks = [
     { name: "Главная", path: "/", default: "active" },

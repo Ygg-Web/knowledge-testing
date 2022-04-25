@@ -1,3 +1,4 @@
+import { memo } from "react";
 import classes from "./input.module.scss";
 
 export const Input = ({ control, onChange, typeStyle }) => {

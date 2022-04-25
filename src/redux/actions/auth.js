@@ -1,5 +1,6 @@
 import { updateProfile } from "firebase/auth";
-import { Axios } from "../../axios";
+// import { Axios } from "../../axios";
+
 import {
   deleteProfile,
   login,
@@ -33,14 +34,6 @@ export const deleteUser = () => {
   return {
     type: "DELETE_USER",
   };
-};
-
-export const addNameUserInBD = (name) => async (dispatch, getState) => {
-  try {
-    await Axios.post("/username.json", getState().auth.displayName);
-  } catch (e) {
-    console.log(e);
-  }
 };
 
 export const auth =
@@ -88,3 +81,11 @@ export const auth =
       return false;
     }
   };
+
+// export const addNameUserInBD = (name) => async (dispatch, getState) => {
+//   try {
+//     await Axios.post("/username.json", getState().auth.displayName);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };

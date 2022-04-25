@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTests } from "../../redux/actions/test";
-import { Loader } from "../../components/UI";
+import { Loader, Search } from "../../components/UI";
 import { CardTest } from "../../components/TestItem/CardTest";
 import { EmptyList } from "../../components/EmptyList";
 
 import classes from "./ListTest.module.scss";
-import { Search } from "../../components/UI/Search";
 
 export const Home = () => {
   const { tests, loading } = useSelector(({ test }) => test);
@@ -17,17 +16,23 @@ export const Home = () => {
     dispatch(fetchTests());
   }, []);
 
-  const searchChangeHandler = (e) =>
-    setSearchString(e.target.value.toLowerCase());
+  const searchChangeHandler = useCallback(
+    (e) => setSearchString(e.target.value.toLowerCase()),
+    []
+  );
 
-  const clearSearchString = () => setSearchString("");
+  const clearSearchString = useCallback(() => setSearchString(""), []);
 
-  const filtredTests = tests.filter((test) => {
-    return (
-      test.name.toLowerCase().includes(searchString) ||
-      test.description.toLowerCase().includes(searchString)
-    );
-  });
+  const filtredTests = useMemo(
+    () =>
+      tests.filter((test) => {
+        return (
+          test.name.toLowerCase().includes(searchString) ||
+          test.description.toLowerCase().includes(searchString)
+        );
+      }),
+    [tests, searchString]
+  );
 
   return (
     <>

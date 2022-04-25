@@ -1,6 +1,7 @@
+import { memo } from "react";
 import classes from "./Button.module.scss";
 
-export const Button = (props) => {
+export const Button = memo((props) => {
   return (
     <button
       className={classes.button}
@@ -10,4 +11,4 @@ export const Button = (props) => {
       {props.children}
     </button>
   );
-};
+});
