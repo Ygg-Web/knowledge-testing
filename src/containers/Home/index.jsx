@@ -5,7 +5,7 @@ import { Loader, Search } from "../../components/UI";
 import { CardTest } from "../../components/TestItem/CardTest";
 import { EmptyList } from "../../components/EmptyList";
 
-import classes from "./ListTest.module.scss";
+import classes from "./Home.module.scss";
 
 export const Home = () => {
   const { tests, loading } = useSelector(({ test }) => test);

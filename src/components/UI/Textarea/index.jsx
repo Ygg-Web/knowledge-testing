@@ -1,4 +1,4 @@
-import classes from "./textarea.module.scss";
+import classes from "./Textarea.module.scss";
 
 export const Textarea = ({ control, onChange }) => {
   const nameFor = `${control.label} + ${Math.random()}`;

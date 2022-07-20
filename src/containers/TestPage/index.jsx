@@ -46,7 +46,7 @@ export const TestPage = () => {
       ) : (
         <div className={classes.test}>
           <div className={classes.image}>
-            <img src={state.test.image} alt="test-img" />
+            <img src={state.test.image} alt='test-img' />
           </div>
           <div className={classes.body}>
             <div className={classes.content}>
@@ -70,21 +70,3 @@ export const TestPage = () => {
     </>
   );
 };
-
-{
-  /* <div className="test__info">
-            <a className="info__user" href="/">
-              <img
-                src="https://yt3.ggpht.com/a/AATXAJz_1rU2Tf3KCJoPZfd7ibjAeyqR9UIHEWB8cQ=s900-c-k-c0xffffffff-no-rj-mo"
-                alt="avatar"
-              />
-              <span>username</span>
-            </a>
-            <a className="info__rating" href="/">
-              <span>123</span>
-            </a>
-            <a className="info__done" href="/">
-              <span>500</span>
-            </a>
-          </div> */
-}

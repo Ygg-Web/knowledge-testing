@@ -1,5 +1,4 @@
-import { memo } from "react";
-import classes from "./input.module.scss";
+import classes from "./Input.module.scss";
 
 export const Input = ({ control, onChange, typeStyle }) => {
   const nameFor = `${control.type} + ${Math.random()}`;
