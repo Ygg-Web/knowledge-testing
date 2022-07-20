@@ -1,0 +1,36 @@
+
+.registration{
+  margin: 70px auto;
+  width: 700px;
+  padding: 40px;
+  background :#221A37;
+  border-radius: 20px;
+   h1{
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  button{
+    max-width: 250px;
+  }
+  form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+  }
+  .controls{
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    button{
+      width: 240px;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.button{
+  width: 100%;
+  // margin: 10px;
+  padding: 15px 20px;
+  display: block;
+  font-size: 20px;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 0px 8px 25px rgba(102, 45, 252, 0.26);
+  background: linear-gradient(90deg, #5D00FA 0%, #D70BCA 100%);
+  cursor: pointer;
+  transition: 1s;
+  &:hover{
+    background: #B396FD;
+  }
+
+  &:disabled{
+    cursor: not-allowed;
+  }
+}
+

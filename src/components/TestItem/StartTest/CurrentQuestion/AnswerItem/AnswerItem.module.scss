@@ -1,0 +1,26 @@
+.answer{
+  margin: 15px 0;
+  label{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 21px;
+    border-radius: 30px;
+    background:#662DFC;
+    transition: .25s;
+    cursor: pointer;
+    &:hover{
+      background: #B396FD;
+      padding: 25px;
+    }
+  }
+  input{
+    display: none;
+  }
+  &.success label {
+    background: #27AE60;
+  }
+  &.failed label {
+    background: #EE5151;
+  }
+}

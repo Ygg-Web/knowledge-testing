@@ -1,0 +1,27 @@
+.finished{
+  text-align: center;
+  h2{
+    margin: 0 0 20px
+  }
+  div > p {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center; 
+    img{
+      width: 20px;
+      height: 20px;
+      margin: 0 10px;
+    }
+  }
+  .list{
+    margin: 20px 0;
+  }
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    button{
+      width: 200px;
+    }
+  }
+}
+

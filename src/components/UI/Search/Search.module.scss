@@ -1,0 +1,27 @@
+.search{
+
+  position: relative;
+    input{
+      background:#221A37;
+      width: 550px;
+      height: 50px;
+      padding: 10px 50px 10px 20px;
+      border-radius: 20px;
+      border: 2px solid #662DFC; 
+      outline: none;
+      font-size: 21px;
+      transition: 0.3s;
+      &:focus{
+        border-color: #27AE60;
+      }
+    }
+    b, p{
+      position: absolute;
+      top: 10px;
+      left: 500px;
+      font-size: 25px;
+    }
+    p{
+      cursor: pointer;
+    }
+}

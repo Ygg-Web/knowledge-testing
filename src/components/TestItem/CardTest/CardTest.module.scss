@@ -1,0 +1,68 @@
+.card{
+  width: 450px;
+  margin: 10px; 
+  background:#161221; // * test
+  border-radius: 20px; // * test
+  .image{
+    width: 100%;
+    height: 250px;
+    img{ // * test
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+  }
+
+  .body{
+    position: relative;
+    padding: 30px;
+      h2{
+        margin: 10px 0;
+        font-size: 23px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: .2s;
+        &:hover{
+          color: #662DFC
+        }
+      }
+      p{
+      font-size: 18px;
+      color: #27AE60;
+      }
+      .profile{
+        position: absolute;
+        top: -50%;
+        left: 225px;
+        transform: translate(-50%, 35%) ;
+        display: flex;
+        justify-content: center;
+        align-items:center;
+        padding: 7px 15px;
+        border:  2px solid #27AE60;
+        border-radius: 20px;
+        background: #161221;
+        h4{
+          margin: 10px 20px;
+        }
+        img{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 3px solid #27AE60;
+          object-fit: cover;
+          text-indent: -1000vh;
+        }
+    }
+  }
+
+  .bottom{
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+}

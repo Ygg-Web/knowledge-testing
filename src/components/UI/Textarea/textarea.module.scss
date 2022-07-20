@@ -1,0 +1,37 @@
+.textarea{
+  margin: 30px 0;
+  font-size: 21px;
+  label{
+    display: inline-block;
+    margin: 0 0 5px 10px;
+  }
+  textarea{
+    width: 100%;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+    padding: 10px 15px;
+    font-size: 21px;
+    font-family: inherit;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background: rgba(255, 200, 255, 0.4);   
+    transition: 0.25s;
+    &:focus{
+      color:#000;
+      background: #fff
+    }
+  }
+  span{
+    display: inline-block;
+    margin: 10px 0 0 10px;
+    color: #EE5151;
+    font-size: 18px;
+  }
+  &.invalid label, &.invalid textarea{
+    border-color: #EE5151;
+    color: #EE5151;
+  }
+}
+

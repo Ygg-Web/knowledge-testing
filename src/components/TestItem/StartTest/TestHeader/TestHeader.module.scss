@@ -1,0 +1,31 @@
+.header{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  background:#221A37;
+  z-index: 100;
+}
+.wrapper{
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  color: #67C15E;
+  .question{
+    display: flex;
+    justify-content: space-between;
+    .count{
+      margin: 0 25px ;
+    }
+  }
+  .exit{
+    span{
+      margin: 0 15px;
+      &:last-child{
+        margin-right:0 ;
+      }
+    }
+
+  }
+}
